@@ -25,7 +25,7 @@ class _UserDetailsState extends State<UserDetails> {
                     color: Colors.grey[850],
                     fontSize: 15),
                 child: Table(children: [
-                  TableRow(decoration: BoxDecoration(), children: [
+                  TableRow(decoration: const BoxDecoration(), children: [
                     const Text('Name'),
                     Text(widget.data![widget.id].name.toString())
                   ]),
