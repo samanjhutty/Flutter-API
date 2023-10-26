@@ -11,26 +11,31 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => const MaterialApp(
-      home: MainTab(title: 'Flutter API'), title: 'Flutter API');
+  Widget build(BuildContext context) => MaterialApp(
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromRGBO(68, 138, 255, 1)),
+          useMaterial3: true),
+      home: const MainTab(title: 'Flutter API'),
+      title: 'Flutter API');
 }
 
 class MainTab extends StatefulWidget {
   const MainTab({required this.title, super.key});
   final String title;
   @override
-  _MainTabState createState() => _MainTabState();
+  State<MainTab> createState() => _MainTabState();
 }
 
 class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
   TabController? _tabController;
 
   final List<Tab> _topTabs = const [
-    Tab(icon: Icon(Icons.feed), text: 'Posts'),
-    Tab(icon: Icon(Icons.photo_album), text: 'Album'),
-    Tab(icon: Icon(Icons.photo), text: 'Photos'),
-    Tab(icon: Icon(Icons.today_outlined), text: 'Todo'),
-    Tab(icon: Icon(Icons.person), text: 'Users')
+    Tab(icon: Icon(Icons.feed)),
+    Tab(icon: Icon(Icons.photo_album)),
+    Tab(icon: Icon(Icons.photo)),
+    Tab(icon: Icon(Icons.today_outlined)),
+    Tab(icon: Icon(Icons.people_rounded))
   ];
 
   @override
@@ -43,10 +48,8 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
             title: Text(widget.title),
-            elevation: 0,
-            foregroundColor: Colors.blue[900],
-            backgroundColor: Colors.white,
             bottom: TabBar(
+              dividerColor: Colors.transparent,
               tabs: _topTabs,
               controller: _tabController,
               labelColor: Colors.blue[800],

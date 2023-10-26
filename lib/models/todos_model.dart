@@ -6,49 +6,43 @@ List<TodosModel> todoModelFromJson(String str) =>
 String todoModelToJson(List<TodosModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+List<TodosModel> completedActions = [];
+List<TodosModel> prendingActions = [];
+
 class TodosModel {
-  int? _userId;
-  int? _id;
-  String? _title;
-  bool? _completed;
+  int? userId;
+  int? id;
+  String? title;
+  bool? completed;
 
   TodosModel({int? userId, int? id, String? title, bool? completed}) {
     if (userId != null) {
-      _userId = userId;
+      this.userId = userId;
     }
     if (id != null) {
-      _id = id;
+      this.id = id;
     }
     if (title != null) {
-      _title = title;
+      this.title = title;
     }
     if (completed != null) {
-      _completed = completed;
+      this.completed = completed;
     }
   }
 
-  int? get userId => _userId;
-  set userId(int? userId) => _userId = userId;
-  int? get id => _id;
-  set id(int? id) => _id = id;
-  String? get title => _title;
-  set title(String? title) => _title = title;
-  bool? get completed => _completed;
-  set completed(bool? completed) => _completed = completed;
-
   TodosModel.fromJson(Map<String, dynamic> json) {
-    _userId = json['userId'];
-    _id = json['id'];
-    _title = json['title'];
-    _completed = json['completed'];
+    userId = json['userId'];
+    id = json['id'];
+    title = json['title'];
+    completed = json['completed'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['userId'] = _userId;
-    data['id'] = _id;
-    data['title'] = _title;
-    data['completed'] = _completed;
+    data['userId'] = userId;
+    data['id'] = id;
+    data['title'] = title;
+    data['completed'] = completed;
     return data;
   }
 }

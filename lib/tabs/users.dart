@@ -1,15 +1,14 @@
 import 'dart:ui';
 import 'package:api/main.dart';
 import 'package:api/models/users_models.dart';
-import 'package:api/pages/user_details.dart';
-import 'package:api/services/api_services.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:api/widgets/user_details.dart';
+import 'package:api/provider/api_services.dart';
 import 'package:flutter/material.dart';
 
 class Users extends StatefulWidget {
   const Users({super.key});
   @override
-  _UsersState createState() => _UsersState();
+  State<Users> createState() => _UsersState();
 }
 
 class _UsersState extends State<Users> {
@@ -23,99 +22,102 @@ class _UsersState extends State<Users> {
 
   void _getUserData() async {
     _userData = await ApiServices().getUsers();
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+    Future.delayed(const Duration(milliseconds: 1))
+        .then((value) => setState(() {}));
   }
 
   @override
-  Widget build(BuildContext context) => Container(
-      child: _userData!.isEmpty
-          ? noData(data: () => _getUserData())
-          : Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: DefaultTextStyle(
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            color: Colors.black87,
-                            fontFeatures: [FontFeature.swash()]),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(right: 24),
-                                  child: Text('S.no')),
-                              Expanded(child: Text('Name')),
-                              Expanded(child: Text('Email')),
-                              Expanded(child: Text('Company')),
-                            ]),
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Container(
+        child: _userData!.isEmpty
+            ? noData(data: () => _getUserData())
+            : Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                    child: Card(
+                      color: scheme.secondary,
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: DefaultTextStyle(
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontFeatures: [FontFeature.swash()]),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                    padding: EdgeInsets.only(right: 24),
+                                    child: Text('S.no')),
+                                Expanded(child: Text('Name')),
+                                Expanded(child: Text('Email')),
+                                Expanded(child: Text('Company')),
+                              ]),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: _userData!.length,
-                      itemBuilder: (context, i) => Card(
-                            child: InkWell(
-                              onTap: () => showCupertinoModalPopup(
-                                  barrierColor: Colors.transparent,
-                                  context: context,
-                                  builder: (BuildContext context) => Material(
-                                      child:
-                                          UserDetails(id: i, data: _userData))),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 16),
-                                        child: CircleAvatar(
-                                            radius: 16,
-                                            child: Text(
-                                                _userData![i].id.toString())),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
+                  Expanded(
+                    child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: _userData!.length,
+                        itemBuilder: (context, i) => Card(
+                              child: InkWell(
+                                onTap: () => showDialog(
+                                    context: context,
+                                    builder: ((_) =>
+                                        UserDetails(id: i, data: _userData))),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
                                           padding:
-                                              const EdgeInsets.only(right: 8),
+                                              const EdgeInsets.only(right: 16),
+                                          child: CircleAvatar(
+                                              radius: 16,
+                                              child: Text(
+                                                  _userData![i].id.toString())),
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8),
+                                            child: Text(
+                                              _userData![i].name.toString(),
+                                              style: const TextStyle(
+                                                  fontFeatures: [
+                                                    FontFeature.swash()
+                                                  ],
+                                                  fontWeight: FontWeight.w600),
+                                              textAlign: TextAlign.left,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
                                           child: Text(
-                                            _userData![i].name.toString(),
-                                            style: const TextStyle(
-                                                fontFeatures: [
-                                                  FontFeature.swash()
-                                                ],
-                                                fontWeight: FontWeight.w600),
+                                            _userData![i].email.toString(),
                                             textAlign: TextAlign.left,
                                           ),
                                         ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          _userData![i].email.toString(),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                            _userData![i]
-                                                .company!
-                                                .name
-                                                .toString(),
-                                            textAlign: TextAlign.right),
-                                      )
-                                    ]),
+                                        Expanded(
+                                          child: Text(
+                                              _userData![i]
+                                                  .company!
+                                                  .name
+                                                  .toString(),
+                                              textAlign: TextAlign.right),
+                                        )
+                                      ]),
+                                ),
                               ),
-                            ),
-                          )),
-                ),
-              ],
-            ));
+                            )),
+                  ),
+                ],
+              ));
+  }
 }
