@@ -13,6 +13,16 @@ class UserDetails extends StatefulWidget {
 class _UserDetailsState extends State<UserDetails> {
   @override
   Widget build(BuildContext context) => AlertDialog(
+        insetPadding: const EdgeInsets.all(16),
+        actions: [
+          TextButton(
+              style: TextButton.styleFrom(alignment: Alignment.center),
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close'))
+        ],
+        actionsPadding: const EdgeInsets.only(bottom: 16),
+        actionsAlignment: MainAxisAlignment.center,
+        title: const Text('User Details'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         content: SizedBox(
           width: MediaQuery.of(context).size.width,

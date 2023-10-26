@@ -42,19 +42,16 @@ class _AlbumsState extends State<Albums> {
                 child: ListView.builder(
                     itemCount: list?.length,
                     itemBuilder: (context, i) => ListTile(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Material(
+                                      child:
+                                          AlbumPhotos(albumId: list![i].id!)))),
                           contentPadding: const EdgeInsets.all(8),
                           title: Text(list![i].title!),
-                          trailing: IconButton(
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Material(
-                                          child: AlbumPhotos(
-                                              albumId: list![i].id!)))),
-                              tooltip: 'Comments',
-                              icon: Icon(Icons.arrow_forward_rounded,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary)),
+                          trailing: Icon(Icons.arrow_forward_rounded,
+                              color: Theme.of(context).colorScheme.secondary),
                         )))
           ]);
   }
