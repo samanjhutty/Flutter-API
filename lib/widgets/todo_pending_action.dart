@@ -38,6 +38,10 @@ class _TodoPendingState extends State<TodoPending> {
                               onChanged: (value) {
                                 setState(() {
                                   prendingActions[i].completed = value;
+                                  if (prendingActions[i].completed == true) {
+                                    completedActions.add(prendingActions[i]);
+                                    prendingActions.removeAt(i);
+                                  }
                                 });
                               })));
                 }));

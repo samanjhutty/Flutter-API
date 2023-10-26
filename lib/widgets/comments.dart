@@ -13,7 +13,7 @@ class Comments extends StatefulWidget {
 }
 
 class _CommentsState extends State<Comments> {
-  List<CommentsModel>? list = [];
+  List<CommentsModel>? commentData = [];
   @override
   void initState() {
     _getCommentsData();
@@ -21,8 +21,15 @@ class _CommentsState extends State<Comments> {
   }
 
   void _getCommentsData() async {
-    list = await ApiServices().getComments(widget.postId!);
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+    List<CommentsModel>? data = await ApiServices().getComments();
+    Future.delayed(const Duration(milliseconds: 1))
+        .then((value) => setState(() {
+              for (int i = 0; i < data!.length; i++) {
+                if (data[i].postId == widget.postId) {
+                  commentData!.add(data[i]);
+                }
+              }
+            }));
   }
 
   @override
@@ -40,10 +47,36 @@ class _CommentsState extends State<Comments> {
             titleTextStyle: const TextStyle(
                 fontWeight: FontWeight.w600, color: Colors.grey),
             title: const Text('Comments')),
-        body: list!.isEmpty
+        body: commentData!.isEmpty
             ? Center(child: noData(data: _getCommentsData))
             : ListView.builder(
-                itemCount: list?.length,
-                itemBuilder: (context, index) => const ListTile()));
+                itemCount: commentData?.length,
+                itemBuilder: (context, i) => Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: CircleAvatar(
+                                child: Text(commentData![i].id.toString())),
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(commentData![i].name!),
+                            titleTextStyle: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                            subtitle: Text(commentData![i].email!),
+                            subtitleTextStyle: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey),
+                          ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 8),
+                              child: Text(
+                                commentData![i].body!,
+                                style: const TextStyle(color: Colors.grey),
+                              )),
+                        ],
+                      ),
+                    )));
   }
 }

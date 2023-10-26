@@ -1,5 +1,4 @@
 import 'package:api/tabs/albums.dart';
-import 'package:api/tabs/photos.dart';
 import 'package:api/tabs/posts.dart';
 import 'package:api/tabs/todos.dart';
 import 'package:api/tabs/users.dart';
@@ -33,7 +32,6 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
   final List<Tab> _topTabs = const [
     Tab(icon: Icon(Icons.feed)),
     Tab(icon: Icon(Icons.photo_album)),
-    Tab(icon: Icon(Icons.photo)),
     Tab(icon: Icon(Icons.today_outlined)),
     Tab(icon: Icon(Icons.people_rounded))
   ];
@@ -57,7 +55,7 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
             )),
         body: TabBarView(
           controller: _tabController,
-          children: const [Posts(), Albums(), Photos(), Todos(), Users()],
+          children: const [Posts(), Albums(), Todos(), Users()],
         ),
       );
 }

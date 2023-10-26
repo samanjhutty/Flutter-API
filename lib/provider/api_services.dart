@@ -73,15 +73,14 @@ class ApiServices {
     return null;
   }
 
-  Future<List<CommentsModel>?> getComments(int postId) async {
+  Future<List<CommentsModel>?> getComments() async {
     try {
       var url = Uri.parse(ApiConstants.baseURL + ApiConstants.commentEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
         //statusCode == 200 means Success
-        List<CommentsModel> commentModel =
-            commentModelFromJson(response.body, postId);
+        List<CommentsModel> commentModel = commentModelFromJson(response.body);
         return commentModel;
       }
     } catch (e) {

@@ -52,7 +52,7 @@ class _PostState extends State<Posts> {
                         ListTile(
                             contentPadding: EdgeInsets.zero,
                             leading: CircleAvatar(
-                                child: Text(list![i].userId.toString())),
+                                child: Text(list![i].id.toString())),
                             titleTextStyle: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black),

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-List<CommentsModel> commentModelFromJson(String str, int postId) =>
+List<CommentsModel> commentModelFromJson(String str) =>
     List<CommentsModel>.from(
-        json.decode(str).map((x) => CommentsModel.fromJson(x, postId)));
+        json.decode(str).map((x) => CommentsModel.fromJson(x)));
 
 String commentModelToJson(List<CommentsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -33,8 +33,8 @@ class CommentsModel {
     }
   }
 
-  CommentsModel.fromJson(Map<String, dynamic> json, int postId) {
-    postId = postId;
+  CommentsModel.fromJson(Map<String, dynamic> json) {
+    postId = json['postId'];
     id = json['id'];
     name = json['name'];
     email = json['email'];

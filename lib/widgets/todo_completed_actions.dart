@@ -38,11 +38,15 @@ class _TodoCompletedState extends State<TodoCompleted> {
                                     color: Colors.grey),
                               ),
                               controlAffinity: ListTileControlAffinity.leading,
-                              activeColor: Colors.blue,
+                              activeColor: Colors.grey,
                               value: completedActions[i].completed,
                               onChanged: (value) {
                                 setState(() {
                                   completedActions[i].completed = value;
+                                  if (completedActions[i].completed == false) {
+                                    prendingActions.add(completedActions[i]);
+                                    completedActions.removeAt(i);
+                                  }
                                 });
                               })));
                 }));
