@@ -1,6 +1,7 @@
 import 'package:api/main.dart';
 import 'package:api/models/posts_model.dart';
 import 'package:api/provider/api_services.dart';
+import 'package:api/widgets/comments.dart';
 import 'package:flutter/material.dart';
 
 class Posts extends StatefulWidget {
@@ -57,8 +58,21 @@ class _PostState extends State<Posts> {
                                 color: Colors.black),
                             title: Text(list![i].title!)),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.only(left: 16, right: 8),
                           child: Text(list![i].body!),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Material(
+                                          child: Comments(postId: list![i].id)),
+                                    )),
+                                child: const Text('Show Commets')),
+                          ],
                         ),
                         const Divider(thickness: 0.3)
                       ]),
