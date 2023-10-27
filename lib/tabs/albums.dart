@@ -26,11 +26,13 @@ class _AlbumsState extends State<Albums> {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
     return list!.isEmpty
         ? Center(child: noData(data: _getAlbumData))
         : Column(children: [
             Container(
-                color: Colors.white,
+                color: scheme.surface,
                 padding: const EdgeInsets.all(8),
                 margin: const EdgeInsets.only(bottom: 4),
                 child: const Row(children: [

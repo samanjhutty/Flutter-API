@@ -13,8 +13,10 @@ class _TodoCompletedState extends State<TodoCompleted> {
   @override
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
     return Container(
-        color: Colors.grey[100],
+        color: scheme.surface,
         child: completedActions.isEmpty
             ? Center(
                 child: noData(data: () {}),
@@ -29,7 +31,7 @@ class _TodoCompletedState extends State<TodoCompleted> {
                           decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),
+                              color: scheme.onInverseSurface),
                           child: CheckboxListTile(
                               title: Text(
                                 completedActions[i].title!,

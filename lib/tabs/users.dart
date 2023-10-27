@@ -29,7 +29,6 @@ class _UsersState extends State<Users> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-
     return Container(
         child: _userData!.isEmpty
             ? noData(data: () => _getUserData())
@@ -38,7 +37,7 @@ class _UsersState extends State<Users> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                     child: Card(
-                      color: scheme.secondary,
+                      color: scheme.surfaceVariant,
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: DefaultTextStyle(

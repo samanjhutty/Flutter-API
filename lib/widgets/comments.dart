@@ -34,6 +34,8 @@ class _CommentsState extends State<Comments> {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
     return Scaffold(
         appBar: AppBar(
             leading: IconButton(
@@ -60,9 +62,9 @@ class _CommentsState extends State<Comments> {
                                 child: Text(commentData![i].id.toString())),
                             contentPadding: EdgeInsets.zero,
                             title: Text(commentData![i].name!),
-                            titleTextStyle: const TextStyle(
+                            titleTextStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black),
+                                color: scheme.onSurface),
                             subtitle: Text(commentData![i].email!),
                             subtitleTextStyle: const TextStyle(
                                 fontWeight: FontWeight.w500,

@@ -13,8 +13,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromRGBO(68, 138, 255, 1)),
+              seedColor: Colors.blue, brightness: Brightness.light),
           useMaterial3: true),
+      darkTheme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.blue, brightness: Brightness.dark),
+          useMaterial3: true),
+      themeMode: ThemeMode.system,
       home: const MainTab(title: 'Flutter API'),
       title: 'Flutter API');
 }
@@ -43,21 +48,25 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-            title: Text(widget.title),
-            bottom: TabBar(
-              dividerColor: Colors.transparent,
-              tabs: _topTabs,
-              controller: _tabController,
-              labelColor: Colors.blue[800],
-              unselectedLabelColor: Colors.black45,
-            )),
-        body: TabBarView(
-          controller: _tabController,
-          children: const [Posts(), Albums(), Todos(), Users()],
-        ),
-      );
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      appBar: AppBar(
+          title: Text(widget.title),
+          bottom: TabBar(
+            dividerColor: Colors.transparent,
+            tabs: _topTabs,
+            controller: _tabController,
+            labelColor: Colors.blue[800],
+            unselectedLabelColor: scheme.onSurface,
+          )),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [Posts(), Albums(), Todos(), Users()],
+      ),
+    );
+  }
 }
 
 Widget? noData({required VoidCallback data}) =>

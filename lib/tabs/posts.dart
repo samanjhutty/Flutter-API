@@ -27,11 +27,12 @@ class _PostState extends State<Posts> {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return list!.isEmpty
         ? Center(child: noData(data: _getPostsData))
         : Column(children: [
             Container(
-                color: Colors.white,
+                color: scheme.surface,
                 padding: const EdgeInsets.all(8),
                 margin: const EdgeInsets.only(bottom: 4),
                 child: const Row(children: [
@@ -53,9 +54,9 @@ class _PostState extends State<Posts> {
                             contentPadding: EdgeInsets.zero,
                             leading: CircleAvatar(
                                 child: Text(list![i].id.toString())),
-                            titleTextStyle: const TextStyle(
+                            titleTextStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black),
+                                color: scheme.onSurface),
                             title: Text(list![i].title!)),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 8),
