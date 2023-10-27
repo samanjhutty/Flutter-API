@@ -16,6 +16,7 @@ class _TodoPendingState extends State<TodoPending> {
     final scheme = Theme.of(context).colorScheme;
 
     return Container(
+        margin: const EdgeInsets.only(top: 4),
         color: scheme.surface,
         child: prendingActions.isEmpty
             ? Center(

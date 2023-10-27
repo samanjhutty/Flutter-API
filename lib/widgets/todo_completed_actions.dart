@@ -16,6 +16,7 @@ class _TodoCompletedState extends State<TodoCompleted> {
     final scheme = Theme.of(context).colorScheme;
 
     return Container(
+        margin: const EdgeInsets.only(top: 4),
         color: scheme.surface,
         child: completedActions.isEmpty
             ? Center(

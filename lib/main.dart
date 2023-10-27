@@ -59,7 +59,7 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
             tabs: _topTabs,
             controller: _tabController,
             labelColor: Colors.blue[800],
-            unselectedLabelColor: scheme.onSurface,
+            unselectedLabelColor: scheme.outlineVariant,
           )),
       body: TabBarView(
         controller: _tabController,
