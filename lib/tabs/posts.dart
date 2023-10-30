@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class Posts extends StatefulWidget {
   const Posts({super.key});
+
   @override
   State<Posts> createState() => _PostState();
 }

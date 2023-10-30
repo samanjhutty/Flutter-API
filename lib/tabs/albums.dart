@@ -3,36 +3,34 @@ import 'package:api/provider/api_services.dart';
 import 'package:api/widgets/album_photos.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
-import '../models/users_models.dart';
 
 class Albums extends StatefulWidget {
-  const Albums({super.key});
+  const Albums({super.key, required this.id});
 
+  final int id;
   @override
   State<Albums> createState() => _AlbumsState();
 }
 
 class _AlbumsState extends State<Albums> {
   List<AlbumsModel>? list = [];
-  List<UsersModel>? _userData = [];
 
   @override
   void initState() {
     _getAlbumData();
-    _getUserData();
     super.initState();
   }
 
-  void _getUserData() async {
-    _userData = await ApiServices().getUsers();
-    Future.delayed(const Duration(milliseconds: 1))
-        .then((value) => setState(() {}));
-  }
-
   void _getAlbumData() async {
-    list = await ApiServices().getAlbums();
+    List<AlbumsModel>? data = await ApiServices().getAlbums();
     Future.delayed(const Duration(milliseconds: 1))
-        .then((value) => setState(() {}));
+        .then((value) => setState(() {
+              for (int i = 0; i < data!.length; i++) {
+                if (data[i].userId == widget.id) {
+                  list!.add(data[i]);
+                }
+              }
+            }));
   }
 
   @override
@@ -63,13 +61,9 @@ class _AlbumsState extends State<Albums> {
                                           AlbumPhotos(albumId: list![i].id!)))),
                           contentPadding: const EdgeInsets.all(8),
                           title: Text(list![i].title!),
-                          subtitle: Text(
-                              'Album by: ${_userData![list![i].userId! - 1].email!}'),
                           titleTextStyle: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: scheme.onSurface),
-                          subtitleTextStyle:
-                              const TextStyle(color: Colors.grey),
                           trailing: Icon(Icons.arrow_forward_rounded,
                               color: scheme.secondary),
                         )))

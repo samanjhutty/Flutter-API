@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:api/main.dart';
 
 class Todos extends StatefulWidget {
-  const Todos({super.key});
+  const Todos({super.key, required this.id});
+
+  final int id;
   @override
   State<Todos> createState() => _TodosState();
 }
@@ -27,19 +29,28 @@ class _TodosState extends State<Todos> with TickerProviderStateMixin {
     super.initState();
   }
 
+  void _getActionData() => setState(() {
+        completedActions.clear();
+        prendingActions.clear();
+        for (int i = 0; i < todoData!.length; i++) {
+          if (todoData![i].completed == true) {
+            completedActions.add(todoData![i]);
+          } else {
+            prendingActions.add(todoData![i]);
+          }
+        }
+      });
+
   void _getTodosData() async {
-    todoData = await ApiServices().getTodos();
+    List<TodosModel>? data = await ApiServices().getTodos();
     Future.delayed(const Duration(milliseconds: 1))
         .then((value) => setState(() {
-              completedActions.clear();
-              prendingActions.clear();
-              for (int i = 0; i < todoData!.length; i++) {
-                if (todoData![i].completed == true) {
-                  completedActions.add(todoData![i]);
-                } else {
-                  prendingActions.add(todoData![i]);
+              for (int i = 0; i < data!.length; i++) {
+                if (data[i].userId == widget.id) {
+                  todoData!.add(data[i]);
                 }
               }
+              _getActionData();
             }));
   }
 

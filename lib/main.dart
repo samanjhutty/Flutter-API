@@ -1,7 +1,7 @@
 import 'package:api/tabs/albums.dart';
 import 'package:api/tabs/posts.dart';
 import 'package:api/tabs/todos.dart';
-import 'package:api/tabs/users.dart';
+import 'package:api/tabs/user_details.dart';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) => runApp(const MyApp());
@@ -20,20 +20,18 @@ class MyApp extends StatelessWidget {
         theme: myTheme(Brightness.light),
         darkTheme: myTheme(Brightness.dark),
         themeMode: ThemeMode.system,
-        home: const MainTab(title: 'Flutter API'),
-        title: 'Flutter API');
+        home: const HomePage());
   }
 }
 
-class MainTab extends StatefulWidget {
-  const MainTab({required this.title, super.key});
-  final String title;
-
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+  final String title = 'Flutter API';
   @override
-  State<MainTab> createState() => _MainTabState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController? _tabController;
 
   final List<Tab> _topTabs = const [
@@ -62,9 +60,12 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
               labelColor: Colors.blue[800],
               unselectedLabelColor: scheme.outlineVariant,
             )),
-        body: TabBarView(
-            controller: _tabController,
-            children: const [Posts(), Albums(), Todos(), Users()]));
+        body: TabBarView(controller: _tabController, children: const [
+          Posts(),
+          Albums(id: 0),
+          Todos(id: 0),
+          UserDetails(id: 0)
+        ]));
   }
 }
 
