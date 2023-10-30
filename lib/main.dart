@@ -9,24 +9,26 @@ void main(List<String> args) => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  myTheme(Brightness brightness) => ThemeData(
+      colorScheme:
+          ColorScheme.fromSeed(seedColor: Colors.blue, brightness: brightness),
+      useMaterial3: true);
+
   @override
-  Widget build(BuildContext context) => MaterialApp(
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.blue, brightness: Brightness.light),
-          useMaterial3: true),
-      darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.blue, brightness: Brightness.dark),
-          useMaterial3: true),
-      themeMode: ThemeMode.system,
-      home: const MainTab(title: 'Flutter API'),
-      title: 'Flutter API');
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        theme: myTheme(Brightness.light),
+        darkTheme: myTheme(Brightness.dark),
+        themeMode: ThemeMode.system,
+        home: const MainTab(title: 'Flutter API'),
+        title: 'Flutter API');
+  }
 }
 
 class MainTab extends StatefulWidget {
   const MainTab({required this.title, super.key});
   final String title;
+
   @override
   State<MainTab> createState() => _MainTabState();
 }
@@ -38,7 +40,7 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
     Tab(icon: Icon(Icons.feed)),
     Tab(icon: Icon(Icons.photo_album)),
     Tab(icon: Icon(Icons.today_outlined)),
-    Tab(icon: Icon(Icons.people_rounded))
+    Tab(icon: Icon(Icons.people_rounded)),
   ];
 
   @override
@@ -50,22 +52,19 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      appBar: AppBar(
-          title: Text(widget.title),
-          bottom: TabBar(
-            dividerColor: Colors.transparent,
-            tabs: _topTabs,
+        appBar: AppBar(
+            title: Text(widget.title),
+            bottom: TabBar(
+              dividerColor: Colors.transparent,
+              tabs: _topTabs,
+              controller: _tabController,
+              labelColor: Colors.blue[800],
+              unselectedLabelColor: scheme.outlineVariant,
+            )),
+        body: TabBarView(
             controller: _tabController,
-            labelColor: Colors.blue[800],
-            unselectedLabelColor: scheme.outlineVariant,
-          )),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [Posts(), Albums(), Todos(), Users()],
-      ),
-    );
+            children: const [Posts(), Albums(), Todos(), Users()]));
   }
 }
 

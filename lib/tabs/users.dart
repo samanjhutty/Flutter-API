@@ -13,7 +13,6 @@ class Users extends StatefulWidget {
 
 class _UsersState extends State<Users> {
   List<UsersModel>? _userData = [];
-
   @override
   void initState() {
     super.initState();
@@ -32,38 +31,38 @@ class _UsersState extends State<Users> {
     return Container(
         child: _userData!.isEmpty
             ? noData(data: () => _getUserData())
-            : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                    child: Card(
-                      color: scheme.surfaceVariant,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: DefaultTextStyle(
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontFeatures: [FontFeature.swash()]),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                    padding: EdgeInsets.only(right: 24),
-                                    child: Text('S.no')),
-                                Expanded(child: Text('Name')),
-                                Expanded(child: Text('Email')),
-                                Expanded(child: Text('Company')),
-                              ]),
-                        ),
+            : Column(children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: Card(
+                    color: scheme.secondaryContainer,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DefaultTextStyle(
+                        style: TextStyle(
+                            color: scheme.onSecondaryContainer,
+                            fontWeight: FontWeight.w900,
+                            fontFeatures: const [FontFeature.swash()]),
+                        child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(right: 24),
+                                  child: Text('S.no')),
+                              Expanded(child: Text('Name')),
+                              Expanded(child: Text('Email')),
+                              Expanded(child: Text('Company')),
+                            ]),
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: _userData!.length,
-                        itemBuilder: (context, i) => Card(
-                              child: InkWell(
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: _userData!.length,
+                      itemBuilder: (context, i) => Card(
+                            child: InkWell(
                                 onTap: () => showDialog(
                                     context: context,
                                     builder: ((_) =>
@@ -112,11 +111,9 @@ class _UsersState extends State<Users> {
                                               textAlign: TextAlign.right),
                                         )
                                       ]),
-                                ),
-                              ),
-                            )),
-                  ),
-                ],
-              ));
+                                )),
+                          )),
+                ),
+              ]));
   }
 }

@@ -19,9 +19,9 @@ class _TodoCompletedState extends State<TodoCompleted> {
         margin: const EdgeInsets.only(top: 4),
         color: scheme.surface,
         child: completedActions.isEmpty
-            ? Center(
-                child: noData(data: () {}),
-              )
+            ? const Center(
+                child: Text('No Completed Actions...',
+                    style: TextStyle(color: Colors.grey)))
             : ListView.builder(
                 itemCount: completedActions.length,
                 itemBuilder: (context, i) {

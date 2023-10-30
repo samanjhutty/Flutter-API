@@ -19,9 +19,9 @@ class _TodoPendingState extends State<TodoPending> {
         margin: const EdgeInsets.only(top: 4),
         color: scheme.surface,
         child: prendingActions.isEmpty
-            ? Center(
-                child: noData(data: () {}),
-              )
+            ? const Center(
+                child: Text('No Pending Actions...',
+                    style: TextStyle(color: Colors.grey)))
             : ListView.builder(
                 itemCount: prendingActions.length,
                 itemBuilder: (context, i) {
