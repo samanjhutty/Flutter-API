@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 
 class Albums extends StatefulWidget {
-  const Albums({super.key, required this.id});
+  const Albums({super.key, required this.userId});
 
-  final int id;
+  final int userId;
   @override
   State<Albums> createState() => _AlbumsState();
 }
@@ -26,7 +26,7 @@ class _AlbumsState extends State<Albums> {
     Future.delayed(const Duration(milliseconds: 1))
         .then((value) => setState(() {
               for (int i = 0; i < data!.length; i++) {
-                if (data[i].userId == widget.id) {
+                if (data[i].userId == widget.userId) {
                   list!.add(data[i]);
                 }
               }

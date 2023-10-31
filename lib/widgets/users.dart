@@ -28,6 +28,7 @@ class _UsersState extends State<Users> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+        contentPadding: const EdgeInsets.all(8),
         actions: [
           TextButton(
               style: TextButton.styleFrom(alignment: Alignment.center),
@@ -44,7 +45,6 @@ class _UsersState extends State<Users> {
               ? Center(child: noData(data: () => _getUserData()))
               : ListView.builder(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.all(8),
                   itemCount: _userData!.length,
                   itemBuilder: (context, i) => Card(
                         child: InkWell(
@@ -65,28 +65,23 @@ class _UsersState extends State<Users> {
                                               _userData![i].id.toString())),
                                     ),
                                     Expanded(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8),
+                                        child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8),
+                                            child: Text(
+                                              _userData![i].name.toString(),
+                                              style: const TextStyle(
+                                                  fontFeatures: [
+                                                    FontFeature.swash()
+                                                  ],
+                                                  fontWeight: FontWeight.w600),
+                                              textAlign: TextAlign.left,
+                                            ))),
+                                    Expanded(
                                         child: Text(
-                                          _userData![i].name.toString(),
-                                          style: const TextStyle(fontFeatures: [
-                                            FontFeature.swash()
-                                          ], fontWeight: FontWeight.w600),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        _userData![i].email.toString(),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(_userData![i].company!.name!,
-                                          textAlign: TextAlign.right),
-                                    )
+                                      _userData![i].email.toString(),
+                                      textAlign: TextAlign.left,
+                                    )),
                                   ]),
                             )),
                       )),

@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
   final String title = 'Flutter API';
   @override
   State<HomePage> createState() => _HomePageState();
@@ -62,9 +63,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             )),
         body: TabBarView(controller: _tabController, children: const [
           Posts(),
-          Albums(id: 0),
-          Todos(id: 0),
-          UserDetails(id: 0)
+          Albums(userId: 1),
+          Todos(userId: 1),
+          UserDetails(userId: 1)
         ]));
   }
 }

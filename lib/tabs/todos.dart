@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:api/main.dart';
 
 class Todos extends StatefulWidget {
-  const Todos({super.key, required this.id});
+  const Todos({super.key, required this.userId});
 
-  final int id;
+  final int userId;
   @override
   State<Todos> createState() => _TodosState();
 }
@@ -46,7 +46,7 @@ class _TodosState extends State<Todos> with TickerProviderStateMixin {
     Future.delayed(const Duration(milliseconds: 1))
         .then((value) => setState(() {
               for (int i = 0; i < data!.length; i++) {
-                if (data[i].userId == widget.id) {
+                if (data[i].userId == widget.userId) {
                   todoData!.add(data[i]);
                 }
               }
