@@ -3,6 +3,7 @@ import 'package:api/main.dart';
 import 'package:api/models/users_models.dart';
 import 'package:api/provider/api_services.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class Users extends StatefulWidget {
   const Users({super.key});
@@ -49,7 +50,14 @@ class _UsersState extends State<Users> {
                   itemBuilder: (context, i) => Card(
                         child: InkWell(
                             onTap: () {
+                              setState(() {
+                                Hive.box('APIbox').put('id', _userData![i].id);
+                              });
                               Navigator.pop(context);
+                              Navigator.pushAndRemoveUntil(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return const Material(child: HomePage());
+                              }), (route) => route.isCurrent);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8),

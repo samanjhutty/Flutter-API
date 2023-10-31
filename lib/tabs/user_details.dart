@@ -64,115 +64,119 @@ class _UserDetailsState extends State<UserDetails> {
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: DefaultTextStyle(
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: scheme.onSurface,
-                      fontSize: 15),
-                  child: Table(children: [
-                    TableRow(children: [
-                      const Text('Username',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(_userData!.username!)
-                    ]),
-                    TableRow(children: [
-                      const Text('Phone',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(_userData!.phone.toString())
-                    ]),
-                    TableRow(children: [
-                      const Text('Website',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(_userData!.website!)
-                    ]),
-                    TableRow(children: [
-                      const Text('Company',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Wrap(children: [
-                              const Text('Name:',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text(_userData!.company!.name!),
-                            ]),
-                            Wrap(children: [
-                              const Text('Catchphrase:',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text(_userData!.company!.catchPhrase!)
-                            ]),
-                            Wrap(children: [
-                              const Text('BS:',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text(_userData!.company!.bs!),
+              child: SingleChildScrollView(
+                child: DefaultTextStyle(
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: scheme.onSurface,
+                        fontSize: 15),
+                    child: Table(children: [
+                      TableRow(children: [
+                        const Text('Username',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(_userData!.username!)
+                      ]),
+                      TableRow(children: [
+                        const Text('Phone',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(_userData!.phone.toString())
+                      ]),
+                      TableRow(children: [
+                        const Text('Website',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(_userData!.website!)
+                      ]),
+                      TableRow(children: [
+                        const Text('Company',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Wrap(children: [
+                                const Text('Name:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(_userData!.company!.name!),
+                              ]),
+                              Wrap(children: [
+                                const Text('Catchphrase:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(_userData!.company!.catchPhrase!)
+                              ]),
+                              Wrap(children: [
+                                const Text('BS:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(_userData!.company!.bs!),
+                              ])
                             ])
-                          ])
-                    ]),
-                    TableRow(children: [
-                      const Text('Address',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Wrap(children: [
-                              const Text('Street:',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text(_userData!.address!.street!),
-                            ]),
-                            Wrap(children: [
-                              const Text('Suite:',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text(_userData!.address!.suite!),
-                            ]),
-                            Wrap(
-                              children: [
-                                const Text('City:',
+                      ]),
+                      TableRow(children: [
+                        const Text('Address',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Wrap(children: [
+                                const Text('Street:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                Text(_userData!.address!.city!),
-                              ],
-                            ),
-                            Wrap(
-                              children: [
-                                const Text('Zip Code:',
+                                Text(_userData!.address!.street!),
+                              ]),
+                              Wrap(children: [
+                                const Text('Suite:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                Text(_userData!.address!.zipcode!),
-                              ],
-                            ),
-                            Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.start,
+                                Text(_userData!.address!.suite!),
+                              ]),
+                              Wrap(
                                 children: [
-                                  const Text('Geo:',
+                                  const Text('City:',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  Wrap(
-                                      direction: Axis.vertical,
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.start,
-                                      children: [
-                                        Wrap(children: [
-                                          const Text('lat:',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          Text(_userData!.address!.geo!.lat!),
-                                        ]),
-                                        Wrap(children: [
-                                          const Text('lng:',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          Text(_userData!.address!.geo!.lng!),
+                                  Text(_userData!.address!.city!),
+                                ],
+                              ),
+                              Wrap(
+                                children: [
+                                  const Text('Zip Code:',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text(_userData!.address!.zipcode!),
+                                ],
+                              ),
+                              Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.start,
+                                  children: [
+                                    const Text('Geo:',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Wrap(
+                                        direction: Axis.vertical,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.start,
+                                        children: [
+                                          Wrap(children: [
+                                            const Text('lat:',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            Text(_userData!.address!.geo!.lat!),
+                                          ]),
+                                          Wrap(children: [
+                                            const Text('lng:',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            Text(_userData!.address!.geo!.lng!),
+                                          ])
                                         ])
-                                      ])
-                                ])
-                          ])
-                    ]),
-                  ])),
+                                  ])
+                            ])
+                      ]),
+                    ])),
+              ),
             )),
             Container(
                 margin: const EdgeInsets.all(16),

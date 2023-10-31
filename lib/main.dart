@@ -3,8 +3,13 @@ import 'package:api/tabs/posts.dart';
 import 'package:api/tabs/todos.dart';
 import 'package:api/tabs/user_details.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main(List<String> args) => runApp(const MyApp());
+void main(List<String> args) async {
+  await Hive.initFlutter();
+  await Hive.openBox('APIbox');
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -51,6 +56,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final int id = Hive.box('APIbox').get('id', defaultValue: 1);
+
     return Scaffold(
         appBar: AppBar(
             title: Text(widget.title),
@@ -61,11 +68,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               labelColor: Colors.blue[800],
               unselectedLabelColor: scheme.outlineVariant,
             )),
-        body: TabBarView(controller: _tabController, children: const [
-          Posts(),
-          Albums(userId: 1),
-          Todos(userId: 1),
-          UserDetails(userId: 1)
+        body: TabBarView(controller: _tabController, children: [
+          const Posts(),
+          Albums(userId: id),
+          Todos(userId: id),
+          UserDetails(userId: id)
         ]));
   }
 }
