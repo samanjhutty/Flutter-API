@@ -14,6 +14,7 @@ class Users extends StatefulWidget {
 
 class _UsersState extends State<Users> {
   List<UsersModel>? _userData = [];
+  Box box = Hive.box('APIbox');
   @override
   void initState() {
     super.initState();
@@ -51,7 +52,11 @@ class _UsersState extends State<Users> {
                         child: InkWell(
                             onTap: () {
                               setState(() {
-                                Hive.box('APIbox').put('id', _userData![i].id);
+                                if (box.get('id') == _userData![i].id) {
+                                  Navigator.pop(context);
+                                } else {
+                                  box.put('id', _userData![i].id);
+                                }
                               });
                               Navigator.pop(context);
                               Navigator.pushAndRemoveUntil(context,
