@@ -1,7 +1,7 @@
-import 'package:api/tabs/albums.dart';
-import 'package:api/tabs/posts.dart';
-import 'package:api/tabs/todos.dart';
-import 'package:api/tabs/user_details.dart';
+import 'package:api/view/tabs/albums.dart';
+import 'package:api/view/tabs/posts.dart';
+import 'package:api/view/tabs/todos.dart';
+import 'package:api/view/tabs/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
