@@ -4,7 +4,7 @@ import 'package:api/models/photos_model.dart';
 import 'package:api/models/posts_model.dart';
 import 'package:api/models/todos_model.dart';
 import 'package:api/controller/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:api/models/users_models.dart';
 
@@ -20,7 +20,8 @@ class ApiGetServices {
         return userModel;
       }
     } catch (e) {
-      debugPrint('Exception:: $e');
+      print('Exception:: $e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
   }
@@ -36,7 +37,8 @@ class ApiGetServices {
         return todoModel;
       }
     } catch (e) {
-      debugPrint('Exception:: $e');
+      print('Exception:: $e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
   }
@@ -52,7 +54,8 @@ class ApiGetServices {
         return postModel;
       }
     } catch (e) {
-      debugPrint('Exception:: $e');
+      print('Exception:: $e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
   }
@@ -68,7 +71,8 @@ class ApiGetServices {
         return photoModel;
       }
     } catch (e) {
-      debugPrint('Exception:: $e');
+      print('Exception:: $e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
   }
@@ -84,7 +88,8 @@ class ApiGetServices {
         return commentModel;
       }
     } catch (e) {
-      debugPrint('Exception:: $e');
+      print('Exception:: $e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
   }
@@ -100,7 +105,8 @@ class ApiGetServices {
         return albumModel;
       }
     } catch (e) {
-      debugPrint('Exception:: $e');
+      print('Exception:: $e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
   }

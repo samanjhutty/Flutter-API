@@ -3,6 +3,7 @@ import 'package:api/view/tabs/posts.dart';
 import 'package:api/view/tabs/todos.dart';
 import 'package:api/view/tabs/user_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main(List<String> args) async {
@@ -21,11 +22,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: myTheme(Brightness.light),
-        darkTheme: myTheme(Brightness.dark),
-        themeMode: ThemeMode.system,
-        home: const HomePage());
+    return GetMaterialApp(
+      theme: myTheme(Brightness.light),
+      darkTheme: myTheme(Brightness.dark),
+      themeMode: ThemeMode.system,
+      home: const HomePage(),
+    );
   }
 }
 
