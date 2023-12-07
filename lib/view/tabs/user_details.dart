@@ -44,10 +44,18 @@ class _UserDetailsState extends State<UserDetails> {
                 color: scheme.surface,
                 padding: const EdgeInsets.all(8),
                 margin: const EdgeInsets.only(bottom: 4),
-                child: const Row(children: [
-                  Text('User Details',
+                child: Row(children: [
+                  const Text('User Details',
                       style: TextStyle(
                           fontWeight: FontWeight.w600, color: Colors.grey)),
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.add_rounded)),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.delete,
+                        color: scheme.error,
+                      ))
                 ])),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),

@@ -1,10 +1,10 @@
 import 'package:api/models/users_models.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../constants.dart';
 import 'package:http/http.dart' as http;
 
-class ApiPutServices {
+class ApiPutServices extends ChangeNotifier {
   Future<void> updateUserDetails({int? id, UsersModel? body}) async {
     try {
       var url =
@@ -17,8 +17,10 @@ class ApiPutServices {
       if (response.statusCode != 201) {
         Get.rawSnackbar(message: 'Failed to create data');
       }
+      notifyListeners();
     } catch (e) {
       print('Exception::$e');
+      Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }
 }
