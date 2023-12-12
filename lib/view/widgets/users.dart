@@ -30,16 +30,16 @@ class _UsersState extends State<Users> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        contentPadding: const EdgeInsets.all(8),
         actions: [
           TextButton(
               style: TextButton.styleFrom(alignment: Alignment.center),
               onPressed: () => Navigator.pop(context),
               child: const Text('Close'))
         ],
+        contentPadding: const EdgeInsets.all(8),
         actionsPadding: const EdgeInsets.only(bottom: 16, right: 16),
-        actionsAlignment: MainAxisAlignment.end,
         insetPadding: const EdgeInsets.all(16),
+        actionsAlignment: MainAxisAlignment.end,
         title: const Text('Switch User'),
         content: SizedBox(
           width: MediaQuery.of(context).size.width,

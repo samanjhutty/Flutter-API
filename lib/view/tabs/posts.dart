@@ -3,6 +3,7 @@ import 'package:api/models/posts_model.dart';
 import 'package:api/controller/api-services/api_get.dart';
 import 'package:api/view/widgets/comments.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Posts extends StatefulWidget {
   const Posts({super.key});
@@ -67,11 +68,8 @@ class _PostState extends State<Posts> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                                onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Material(
-                                          child: Comments(postId: list![i].id)),
+                                onPressed: () => Get.to(Comments(
+                                      postId: list![i].id,
                                     )),
                                 child: const Text('Show Commets')),
                           ],

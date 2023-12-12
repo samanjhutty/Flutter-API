@@ -35,49 +35,51 @@ class _CommentsState extends State<Comments> {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
 
-    return Scaffold(
-        appBar: AppBar(
-            leading: IconButton(
-                iconSize: 20,
-                splashRadius: 16,
-                color: Colors.grey,
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(
-                  Icons.arrow_back_rounded,
-                )),
-            titleTextStyle: const TextStyle(
-                fontWeight: FontWeight.w600, color: Colors.grey),
-            title: const Text('Comments')),
-        body: commentData!.isEmpty
-            ? Center(child: noData(data: _getCommentsData))
-            : ListView.builder(
-                itemCount: commentData?.length,
-                itemBuilder: (context, i) => Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: CircleAvatar(
-                                child: Text(commentData![i].id.toString())),
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(commentData![i].name!),
-                            titleTextStyle: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: scheme.onSurface),
-                            subtitle: Text(commentData![i].email!),
-                            subtitleTextStyle: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey),
-                          ),
-                          Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16, right: 8),
-                              child: Text(
-                                commentData![i].body!,
-                                style: const TextStyle(color: Colors.grey),
-                              )),
-                        ],
-                      ),
-                    )));
+    return Material(
+      child: Scaffold(
+          appBar: AppBar(
+              leading: IconButton(
+                  iconSize: 20,
+                  splashRadius: 16,
+                  color: Colors.grey,
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                  )),
+              titleTextStyle: const TextStyle(
+                  fontWeight: FontWeight.w600, color: Colors.grey),
+              title: const Text('Comments')),
+          body: commentData!.isEmpty
+              ? Center(child: noData(data: _getCommentsData))
+              : ListView.builder(
+                  itemCount: commentData?.length,
+                  itemBuilder: (context, i) => Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading: CircleAvatar(
+                                  child: Text(commentData![i].id.toString())),
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(commentData![i].name!),
+                              titleTextStyle: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: scheme.onSurface),
+                              subtitle: Text(commentData![i].email!),
+                              subtitleTextStyle: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey),
+                            ),
+                            Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 8),
+                                child: Text(
+                                  commentData![i].body!,
+                                  style: const TextStyle(color: Colors.grey),
+                                )),
+                          ],
+                        ),
+                      ))),
+    );
   }
 }

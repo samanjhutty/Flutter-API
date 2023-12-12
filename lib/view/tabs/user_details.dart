@@ -1,7 +1,11 @@
+import 'package:api/controller/api-services/api_delete.dart';
 import 'package:api/main.dart';
 import 'package:api/models/users_models.dart';
+import 'package:api/view/add-widgets/add_user.dart';
+import 'package:api/view/widgets/assets.dart';
 import 'package:api/view/widgets/users.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../controller/api-services/api_get.dart';
 
@@ -44,19 +48,13 @@ class _UserDetailsState extends State<UserDetails> {
                 color: scheme.surface,
                 padding: const EdgeInsets.all(8),
                 margin: const EdgeInsets.only(bottom: 4),
-                child: Row(children: [
-                  const Text('User Details',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.grey)),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.add_rounded)),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.delete,
-                        color: scheme.error,
-                      ))
-                ])),
+                child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('User Details',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, color: Colors.grey))
+                    ])),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
               child: Card(
@@ -191,16 +189,69 @@ class _UserDetailsState extends State<UserDetails> {
                 alignment: Alignment.bottomCenter,
                 child: Row(children: [
                   Expanded(
+                      flex: 5,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)))),
+                          onPressed: () => showDialog(
+                              context: context, builder: (_) => const Users()),
+                          child: const Text('Switch User'))),
+                  const SizedBox(width: 8),
+                  Expanded(
+                      child: Tooltip(
+                    richMessage: const TextSpan(text: 'Add User'),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(4)))),
-                        onPressed: () => showDialog(
-                            context: context, builder: (_) => const Users()),
-                        child: const Text('Switch User')),
-                  )
+                        onPressed: () => mydialog(
+                            context: context,
+                            title: 'Create User',
+                            content: 'Do you wich to create a new User',
+                            ontap: () => Get.off(() => const AddUser())),
+                        child: const Icon(Icons.add_rounded)),
+                  )),
+                  const SizedBox(width: 8),
+                  PopupMenuButton(
+                      icon: Icon(Icons.more_vert, color: scheme.primary),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      itemBuilder: (context) => <PopupMenuEntry>[
+                            PopupMenuItem(
+                                child: const Row(children: [
+                                  Icon(Icons.edit),
+                                  SizedBox(width: 16),
+                                  Text('Edit')
+                                ]),
+                                onTap: () {
+                                  Get.back();
+                                }),
+                            PopupMenuItem(
+                                child: Row(children: [
+                                  Icon(
+                                    Icons.delete,
+                                    color: scheme.error,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  const Text('Delete')
+                                ]),
+                                onTap: () => mydialog(
+                                    context: context,
+                                    title: 'Delete User',
+                                    content:
+                                        'Do you wich to Delete the current User',
+                                    ontap: () async {
+                                      Get.back();
+                                      await ApiDeleteServices()
+                                          .deleteUser(id: widget.userId);
+                                      setState(() {});
+                                    }))
+                          ])
                 ]))
           ]);
   }

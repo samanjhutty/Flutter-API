@@ -1,9 +1,11 @@
 import 'package:api/models/todos_model.dart';
+import 'package:api/view/add-widgets/add_todo.dart';
 import 'package:api/view/widgets/todo_completed_actions.dart';
 import 'package:api/controller/api-services/api_get.dart';
 import 'package:api/view/widgets/todo_pending_action.dart';
 import 'package:flutter/material.dart';
 import 'package:api/main.dart';
+import 'package:get/get.dart';
 
 class Todos extends StatefulWidget {
   const Todos({super.key, required this.userId});
@@ -57,16 +59,22 @@ class _TodosState extends State<Todos> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            toolbarHeight: 0,
-            bottom: TabBar(
-              tabs: _tabs,
+      appBar: AppBar(
+          toolbarHeight: 0,
+          bottom: TabBar(
+            tabs: _tabs,
+            controller: _controller,
+          )),
+      body: todoData!.isEmpty
+          ? Center(child: noData(data: _getTodosData))
+          : TabBarView(
               controller: _controller,
-            )),
-        body: todoData!.isEmpty
-            ? Center(child: noData(data: _getTodosData))
-            : TabBarView(
-                controller: _controller,
-                children: const [TodoPending(), TodoCompleted()]));
+              children: const [TodoPending(), TodoCompleted()]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.to(() => const AddTodo()),
+        tooltip: 'Add Todo',
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }

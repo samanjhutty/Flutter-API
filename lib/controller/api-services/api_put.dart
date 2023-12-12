@@ -1,125 +1,132 @@
-import 'package:api/models/albums_model.dart';
-import 'package:api/models/comments_model.dart';
-import 'package:api/models/photos_model.dart';
-import 'package:api/models/posts_model.dart';
-import 'package:api/models/todos_model.dart';
-import 'package:api/models/users_models.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import '../constants.dart';
 import 'package:http/http.dart' as http;
 
-class ApiPutServices extends ChangeNotifier {
-  Future<void> updateUserDetails({UsersModel? body}) async {
+class ApiPutServices {
+  Future<void> updateUserDetails(
+      {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.userEndpoint}/${body!.id}');
+      var url =
+          Uri.parse('${ApiConstants.baseURL + ApiConstants.userEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: body);
-      if (response.statusCode != 201) {
-        Get.rawSnackbar(message: 'Failed to update User Details');
+          body: jsonEncode(data));
+      if (response.statusCode != 200) {
+        Get.rawSnackbar(
+            message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
+      } else {
+        Get.rawSnackbar(message: 'User Updated sucessfully');
       }
-      notifyListeners();
     } catch (e) {
-      print('Exception::$e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }
 
-  Future<void> updateTodo({TodosModel? body}) async {
+  Future<void> updateTodo(
+      {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.todoEndpoint}/${body!.id}');
+      var url =
+          Uri.parse('${ApiConstants.baseURL + ApiConstants.todoEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: body);
-      if (response.statusCode != 201) {
-        Get.rawSnackbar(message: 'Failed to update Todo');
+          body: jsonEncode(data));
+      if (response.statusCode != 200) {
+        Get.rawSnackbar(
+            message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
+      } else {
+        Get.rawSnackbar(message: 'Todo Updated sucessfully');
       }
-      notifyListeners();
     } catch (e) {
-      print('Exception::$e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }
 
-  Future<void> updatePost({PostsModel? body}) async {
+  Future<void> updatePost(
+      {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.postEndpoint}/${body!.id}');
+      var url =
+          Uri.parse('${ApiConstants.baseURL + ApiConstants.postEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: body);
-      if (response.statusCode != 201) {
-        Get.rawSnackbar(message: 'Failed to update Post');
+          body: jsonEncode(data));
+      if (response.statusCode != 200) {
+        Get.rawSnackbar(
+            message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
+      } else {
+        Get.rawSnackbar(message: 'Post Updated sucessfully');
       }
-      notifyListeners();
     } catch (e) {
-      print('Exception::$e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }
 
-  Future<void> updatePhoto({PhotosModel? body}) async {
+  Future<void> updatePhoto(
+      {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.photoEndpoint}/${body!.id}');
+      var url =
+          Uri.parse('${ApiConstants.baseURL + ApiConstants.photoEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: body);
-      if (response.statusCode != 201) {
-        Get.rawSnackbar(message: 'Failed to change Photo');
+          body: jsonEncode(data));
+      if (response.statusCode != 200) {
+        Get.rawSnackbar(
+            message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
+      } else {
+        Get.rawSnackbar(message: 'Photo Updated sucessfully');
       }
-      notifyListeners();
     } catch (e) {
-      print('Exception::$e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }
 
-  Future<void> updateComment({CommentsModel? body}) async {
+  Future<void> updateComment(
+      {required Map<String, dynamic> data, required int id}) async {
     try {
       var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.commentEndpoint}/${body!.id}');
+          '${ApiConstants.baseURL + ApiConstants.commentEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: body);
-      if (response.statusCode != 201) {
-        Get.rawSnackbar(message: 'Failed to update Comment');
+          body: jsonEncode(data));
+      if (response.statusCode != 200) {
+        Get.rawSnackbar(
+            message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
+      } else {
+        Get.rawSnackbar(message: 'Comment Updated sucessfully');
       }
-      notifyListeners();
     } catch (e) {
-      print('Exception::$e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }
 
-  Future<void> updateAlbum({AlbumsModel? body}) async {
+  Future<void> updateAlbum(
+      {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.albumEndpoint}/${body!.id}');
+      var url =
+          Uri.parse('${ApiConstants.baseURL + ApiConstants.albumEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: body);
-      if (response.statusCode != 201) {
-        Get.rawSnackbar(message: 'Failed to update Album');
+          body: jsonEncode(data));
+      if (response.statusCode != 200) {
+        Get.rawSnackbar(
+            message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
+      } else {
+        Get.rawSnackbar(message: 'Post Updated sucessfully');
       }
-      notifyListeners();
     } catch (e) {
-      print('Exception::$e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
   }

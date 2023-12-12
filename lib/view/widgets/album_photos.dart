@@ -36,45 +36,47 @@ class _AlbumPhotosState extends State<AlbumPhotos> {
   @override
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context);
-    return Scaffold(
-        appBar: AppBar(
-            leading: IconButton(
-                iconSize: 20,
-                splashRadius: 16,
-                color: Colors.grey,
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(
-                  Icons.arrow_back_rounded,
-                )),
-            titleTextStyle: const TextStyle(
-                fontWeight: FontWeight.w600, color: Colors.grey),
-            title: const Text('Album Photos')),
-        body: photoData!.isEmpty
-            ? Center(child: noData(data: _getPhotos))
-            : GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                        device.orientation == Orientation.landscape ? 8 : 4,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8),
-                itemCount: photoData!.length,
-                itemBuilder: (BuildContext context, i) => GridTile(
-                  footer:
-                      GridTileBar(title: Text(photoData![i].title.toString())),
-                  child: Card(
-                    child: InkWell(
-                      onTap: () => showDialog(
-                          context: context,
-                          builder: ((_) => ImagePreview(
-                              url: photoData![i].url!,
-                              caption: photoData![i].title!))),
-                      child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          child: Image.network(photoData![i].thumbnailUrl!)),
+    return Material(
+      child: Scaffold(
+          appBar: AppBar(
+              leading: IconButton(
+                  iconSize: 20,
+                  splashRadius: 16,
+                  color: Colors.grey,
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                  )),
+              titleTextStyle: const TextStyle(
+                  fontWeight: FontWeight.w600, color: Colors.grey),
+              title: const Text('Album Photos')),
+          body: photoData!.isEmpty
+              ? Center(child: noData(data: _getPhotos))
+              : GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:
+                          device.orientation == Orientation.landscape ? 8 : 4,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8),
+                  itemCount: photoData!.length,
+                  itemBuilder: (BuildContext context, i) => GridTile(
+                    footer: GridTileBar(
+                        title: Text(photoData![i].title.toString())),
+                    child: Card(
+                      child: InkWell(
+                        onTap: () => showDialog(
+                            context: context,
+                            builder: ((_) => ImagePreview(
+                                url: photoData![i].url!,
+                                caption: photoData![i].title!))),
+                        child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            child: Image.network(photoData![i].thumbnailUrl!)),
+                      ),
                     ),
                   ),
-                ),
-              ));
+                )),
+    );
   }
 }

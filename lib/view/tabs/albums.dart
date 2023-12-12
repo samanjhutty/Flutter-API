@@ -2,6 +2,7 @@ import 'package:api/models/albums_model.dart';
 import 'package:api/controller/api-services/api_get.dart';
 import 'package:api/view/widgets/album_photos.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../main.dart';
 
 class Albums extends StatefulWidget {
@@ -53,12 +54,8 @@ class _AlbumsState extends State<Albums> {
                 child: ListView.builder(
                     itemCount: list?.length,
                     itemBuilder: (context, i) => ListTile(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Material(
-                                      child:
-                                          AlbumPhotos(albumId: list![i].id!)))),
+                          onTap: () =>
+                              Get.to(AlbumPhotos(albumId: list![i].id!)),
                           contentPadding: const EdgeInsets.all(8),
                           title: Text(list![i].title!),
                           titleTextStyle: TextStyle(

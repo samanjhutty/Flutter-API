@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      routes: {'/': (p0) => const HomePage()},
       theme: myTheme(Brightness.light),
       darkTheme: myTheme(Brightness.dark),
       themeMode: ThemeMode.system,
-      home: const HomePage(),
     );
   }
 }

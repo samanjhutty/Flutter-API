@@ -20,7 +20,6 @@ class ApiGetServices {
         return userModel;
       }
     } catch (e) {
-      print('Exception:: $e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
@@ -37,7 +36,6 @@ class ApiGetServices {
         return todoModel;
       }
     } catch (e) {
-      print('Exception:: $e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
@@ -54,7 +52,6 @@ class ApiGetServices {
         return postModel;
       }
     } catch (e) {
-      print('Exception:: $e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
@@ -71,7 +68,6 @@ class ApiGetServices {
         return photoModel;
       }
     } catch (e) {
-      print('Exception:: $e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
@@ -88,7 +84,6 @@ class ApiGetServices {
         return commentModel;
       }
     } catch (e) {
-      print('Exception:: $e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
@@ -105,7 +100,6 @@ class ApiGetServices {
         return albumModel;
       }
     } catch (e) {
-      print('Exception:: $e');
       Get.rawSnackbar(message: 'Something went wrong, try again');
     }
     return null;
