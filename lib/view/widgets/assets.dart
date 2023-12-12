@@ -20,6 +20,8 @@ mydialog(
               ]);
         });
 myAppBar() => AppBar(
+    elevation: 0,
+    surfaceTintColor: Colors.transparent,
     leading: IconButton(
         onPressed: () => Get.back(),
         icon: const Icon(Icons.arrow_back_rounded)));
