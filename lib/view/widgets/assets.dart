@@ -23,3 +23,21 @@ myAppBar() => AppBar(
     leading: IconButton(
         onPressed: () => Get.back(),
         icon: const Icon(Icons.arrow_back_rounded)));
+myTableRowDivider(BuildContext context) {
+  double tablespacing = MediaQuery.of(context).size.height * 0.03;
+
+  return TableRow(children: [
+    SizedBox(
+        height: tablespacing,
+        child: Padding(
+          padding: EdgeInsets.only(right: tablespacing * 2),
+          child: const Divider(),
+        )),
+    SizedBox(
+        height: tablespacing,
+        child: Padding(
+          padding: EdgeInsets.only(right: tablespacing),
+          child: const Divider(),
+        ))
+  ]);
+}

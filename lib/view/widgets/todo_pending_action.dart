@@ -67,12 +67,16 @@ class _TodoPendingState extends State<TodoPending> {
                                                   content:
                                                       'Delete this todo and its contents',
                                                   ontap: () async {
-                                                    ApiDeleteServices()
+                                                    await ApiDeleteServices()
                                                         .deleteTodos(
                                                             id: prendingActions[
                                                                     i]
                                                                 .id);
-                                                    Get.back();
+                                                    setState(() {
+                                                      prendingActions
+                                                          .removeAt(i);
+                                                    });
+                                                    Get.close(1);
                                                   }))
                                         ]),
                                 controlAffinity:

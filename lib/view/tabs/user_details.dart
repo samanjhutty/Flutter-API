@@ -32,6 +32,7 @@ class _UserDetailsState extends State<UserDetails> {
               for (int i = 0; i < data!.length; i++) {
                 if (data[i].id == widget.userId) {
                   _userData = data[i];
+                  break;
                 }
               }
             }));
@@ -40,6 +41,7 @@ class _UserDetailsState extends State<UserDetails> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    double tablerowspacing = MediaQuery.of(context).size.height * 0.005;
 
     return _userData == null
         ? Center(child: noData(data: _getUserData))
@@ -68,9 +70,9 @@ class _UserDetailsState extends State<UserDetails> {
               ),
             ),
             Expanded(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: DefaultTextStyle(
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -82,16 +84,19 @@ class _UserDetailsState extends State<UserDetails> {
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         Text(_userData!.username!)
                       ]),
+                      myTableRowDivider(context),
                       TableRow(children: [
                         const Text('Phone',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         Text(_userData!.phone.toString())
                       ]),
+                      myTableRowDivider(context),
                       TableRow(children: [
                         const Text('Website',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         Text(_userData!.website!)
                       ]),
+                      myTableRowDivider(context),
                       TableRow(children: [
                         const Text('Company',
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -104,20 +109,23 @@ class _UserDetailsState extends State<UserDetails> {
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 Text(_userData!.company!.name!),
                               ]),
+                              SizedBox(height: tablerowspacing),
                               Wrap(children: [
                                 const Text('Catchphrase:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 Text(_userData!.company!.catchPhrase!)
                               ]),
+                              SizedBox(height: tablerowspacing),
                               Wrap(children: [
-                                const Text('BS:',
+                                const Text('Description:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 Text(_userData!.company!.bs!),
                               ])
                             ])
                       ]),
+                      myTableRowDivider(context),
                       TableRow(children: [
                         const Text('Address',
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -130,28 +138,28 @@ class _UserDetailsState extends State<UserDetails> {
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 Text(_userData!.address!.street!),
                               ]),
+                              SizedBox(height: tablerowspacing),
                               Wrap(children: [
                                 const Text('Suite:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 Text(_userData!.address!.suite!),
                               ]),
-                              Wrap(
-                                children: [
-                                  const Text('City:',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text(_userData!.address!.city!),
-                                ],
-                              ),
-                              Wrap(
-                                children: [
-                                  const Text('Zip Code:',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text(_userData!.address!.zipcode!),
-                                ],
-                              ),
+                              SizedBox(height: tablerowspacing),
+                              Wrap(children: [
+                                const Text('City:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(_userData!.address!.city!),
+                              ]),
+                              SizedBox(height: tablerowspacing),
+                              Wrap(children: [
+                                const Text('Zip Code:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(_userData!.address!.zipcode!),
+                              ]),
+                              SizedBox(height: tablerowspacing),
                               Wrap(
                                   crossAxisAlignment: WrapCrossAlignment.start,
                                   children: [
@@ -176,14 +184,14 @@ class _UserDetailsState extends State<UserDetails> {
                                                     fontWeight:
                                                         FontWeight.bold)),
                                             Text(_userData!.address!.geo!.lng!),
-                                          ])
-                                        ])
-                                  ])
-                            ])
+                                          ]),
+                                        ]),
+                                  ]),
+                            ]),
                       ]),
                     ])),
               ),
-            )),
+            ),
             Container(
                 margin: const EdgeInsets.all(16),
                 alignment: Alignment.bottomCenter,

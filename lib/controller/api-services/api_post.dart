@@ -23,7 +23,7 @@ class ApiPostServices {
     }
   }
 
-  Future<void> postUser({required Map<String, dynamic> data}) async {
+  Future<void> createUser({required Map<String, dynamic> data}) async {
     try {
       var url = Uri.parse(ApiConstants.baseURL + ApiConstants.userEndpoint);
       var response = await http.post(url,
