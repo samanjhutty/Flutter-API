@@ -50,7 +50,8 @@ class _TodoCompletedState extends State<TodoCompleted> {
                                   mydialog(
                                       context: context,
                                       title: 'Mark Pending',
-                                      content: 'Move Todo to Pending tasks',
+                                      content: const Text(
+                                          'Move Todo to Pending tasks'),
                                       ontap: () => setState(() {
                                             completedActions[i].completed =
                                                 value;

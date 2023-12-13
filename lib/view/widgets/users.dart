@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:api/main.dart';
 import 'package:api/models/users_models.dart';
 import 'package:api/controller/api-services/api_get.dart';
+import 'package:api/view/widgets/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class Users extends StatefulWidget {
   const Users({super.key});
@@ -14,7 +14,6 @@ class Users extends StatefulWidget {
 
 class _UsersState extends State<Users> {
   List<UsersModel>? _userData = [];
-  Box box = Hive.box('APIbox');
   @override
   void initState() {
     super.initState();

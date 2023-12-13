@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+Box box = Hive.box('APIbox');
 
 mydialog(
         {required BuildContext context,
         required String title,
-        required String content,
-        required VoidCallback ontap}) =>
+        required Widget content,
+        required VoidCallback ontap,
+        String yesText = 'Yes',
+        String noText = 'No'}) =>
     showDialog(
         context: context,
         builder: (context) {
@@ -13,12 +18,45 @@ mydialog(
               actionsPadding: const EdgeInsets.only(bottom: 16, right: 16),
               insetPadding: const EdgeInsets.all(16),
               title: Text(title),
-              content: Text(content),
+              content: content,
               actions: [
-                TextButton(onPressed: ontap, child: const Text('Yes')),
-                TextButton(onPressed: () => Get.back(), child: const Text('No'))
+                TextButton(onPressed: ontap, child: Text(yesText)),
+                TextButton(onPressed: () => Get.back(), child: Text(noText))
               ]);
         });
+moreButton(
+        {required ColorScheme scheme,
+        required VoidCallback editTap,
+        required VoidCallback deleteTap,
+        required String content}) =>
+    PopupMenuButton(
+        position: PopupMenuPosition.under,
+        icon: Icon(Icons.more_vert, color: scheme.primary),
+        itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                  onTap: editTap,
+                  child: const Row(children: [
+                    Icon(Icons.edit),
+                    SizedBox(width: 16),
+                    Text('Edit')
+                  ])),
+              PopupMenuItem(
+                  child: Row(children: [
+                    Icon(
+                      Icons.delete,
+                      color: scheme.error,
+                    ),
+                    const SizedBox(width: 16),
+                    const Text('Delete')
+                  ]),
+                  onTap: () => mydialog(
+                      context: context,
+                      title: 'Delete $content',
+                      content:
+                          Text('Do you wich to Delete the current $content'),
+                      ontap: deleteTap))
+            ]);
+
 myAppBar() => AppBar(
     elevation: 0,
     surfaceTintColor: Colors.transparent,

@@ -1,10 +1,15 @@
-import 'package:api/view/tabs/albums.dart';
-import 'package:api/view/tabs/posts.dart';
-import 'package:api/view/tabs/todos.dart';
-import 'package:api/view/tabs/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'view/add-widgets/add_comment.dart';
+import 'view/add-widgets/add_photo.dart';
+import 'view/add-widgets/add_post.dart';
+import 'view/add-widgets/add_todo.dart';
+import 'view/add-widgets/add_user.dart';
+import 'view/tabs/albums.dart';
+import 'view/tabs/posts.dart';
+import 'view/tabs/todos.dart';
+import 'view/tabs/user_details.dart';
 
 void main(List<String> args) async {
   await Hive.initFlutter();
@@ -23,7 +28,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      routes: {'/': (p0) => const HomePage()},
+      routes: {
+        '/': (p0) => const HomePage(),
+        '/add-user': (p0) => const AddUser(),
+        '/add-todo': (p0) => const AddTodo(),
+        '/add-photo': (p0) => const AddPhoto(),
+        '/add-comment': (p0) => const AddComment(),
+        '/add-post': (p0) => const AddPost(),
+      },
       theme: myTheme(Brightness.light),
       darkTheme: myTheme(Brightness.dark),
       themeMode: ThemeMode.system,

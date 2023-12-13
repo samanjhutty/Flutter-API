@@ -1,5 +1,4 @@
 import 'package:api/models/todos_model.dart';
-import 'package:api/view/add-widgets/add_todo.dart';
 import 'package:api/view/widgets/todo_completed_actions.dart';
 import 'package:api/controller/api-services/api_get.dart';
 import 'package:api/view/widgets/todo_pending_action.dart';
@@ -71,7 +70,7 @@ class _TodosState extends State<Todos> with TickerProviderStateMixin {
               controller: _controller,
               children: const [TodoPending(), TodoCompleted()]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => const AddTodo()),
+        onPressed: () => Get.toNamed('/add-todo'),
         tooltip: 'Add Todo',
         child: const Icon(Icons.add),
       ),

@@ -111,7 +111,7 @@ class ApiPostServices {
         Get.rawSnackbar(
             message: 'Error: ${response.statusCode} ${response.reasonPhrase}');
       } else {
-        Get.rawSnackbar(message: 'Post added sucessfully');
+        Get.rawSnackbar(message: 'Album added sucessfully');
       }
     } catch (e) {
       Get.rawSnackbar(message: 'Something went wrong, try again');

@@ -84,9 +84,9 @@ class ApiDeleteServices {
           Uri.parse('${ApiConstants.baseURL + ApiConstants.albumEndpoint}/$id');
       var response = await http.delete(url);
       if (response.statusCode == 200) {
-        Get.rawSnackbar(message: 'Post deleted sucessfully');
+        Get.rawSnackbar(message: 'Album deleted sucessfully');
       } else {
-        Get.rawSnackbar(message: 'Failed to delete Post');
+        Get.rawSnackbar(message: 'Failed to delete Album');
       }
     } catch (e) {
       Get.rawSnackbar(message: 'Something went wrong, try again');

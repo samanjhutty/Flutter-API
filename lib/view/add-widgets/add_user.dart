@@ -6,8 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddUser extends StatefulWidget {
-  const AddUser({super.key});
+  const AddUser({super.key, this.data});
 
+  final UsersModel? data;
   @override
   State<AddUser> createState() => _AddUserState();
 }
@@ -23,13 +24,32 @@ class _AddUserState extends State<AddUser> {
   TextEditingController cNameController = TextEditingController();
   TextEditingController cBsController = TextEditingController();
   TextEditingController cPhraseController = TextEditingController(text: '');
-  TextEditingController geoLatController = TextEditingController(text: '');
-  TextEditingController geoLngController = TextEditingController(text: '');
 
   TextEditingController adrCityController = TextEditingController();
   TextEditingController adrZipController = TextEditingController();
   TextEditingController adrStreetController = TextEditingController();
   TextEditingController adrSuiteController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.data != null) {
+      nameController.text = widget.data!.name!;
+      usernameController.text = widget.data!.username!;
+      emailController.text = widget.data!.email!;
+      phoneController.text = widget.data!.phone!;
+      websiteController.text = widget.data!.website!;
+
+      cNameController.text = widget.data!.company!.name!;
+      cBsController.text = widget.data!.company!.bs!;
+      cPhraseController.text = widget.data!.company!.catchPhrase!;
+
+      adrCityController.text = widget.data!.address!.city!;
+      adrStreetController.text = widget.data!.address!.street!;
+      adrSuiteController.text = widget.data!.address!.suite!;
+      adrZipController.text = widget.data!.address!.zipcode!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +175,7 @@ class _AddUserState extends State<AddUser> {
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   label: Text('Phone')),
-                              maxLength: 11,
+                              maxLength: 13,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
@@ -236,8 +256,8 @@ class _AddUserState extends State<AddUser> {
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'Zip cannot be empty!';
-                                        } else if (value.length != 10) {
-                                          return 'Invalid Zip, must be 10 digit long';
+                                        } else if (value.length > 5) {
+                                          return 'Invalid Zip';
                                         } else {
                                           return null;
                                         }
@@ -334,8 +354,9 @@ class _AddUserState extends State<AddUser> {
                                                       phone:
                                                           phoneController.text,
                                                       address: Address(
-                                                          city: adrCityController
-                                                              .text,
+                                                          city:
+                                                              adrCityController
+                                                                  .text,
                                                           street:
                                                               adrStreetController
                                                                   .text,
@@ -344,19 +365,17 @@ class _AddUserState extends State<AddUser> {
                                                                   .text,
                                                           zipcode:
                                                               adrZipController
-                                                                  .text,
-                                                          geo: Geo(
-                                                              lat: geoLatController
-                                                                  .text,
-                                                              lng:
-                                                                  geoLngController
-                                                                      .text)),
+                                                                  .text),
                                                       company: Company(
-                                                          name: cNameController.text,
-                                                          bs: cBsController.text,
-                                                          catchPhrase: cPhraseController.text))
+                                                          name: cNameController
+                                                              .text,
+                                                          bs: cBsController
+                                                              .text,
+                                                          catchPhrase:
+                                                              cPhraseController
+                                                                  .text))
                                                   .toJson());
-                                          Get.close(1);
+                                          Get.until(ModalRoute.withName('/'));
                                         }
                                       },
                                       child: const Text('Save'))),

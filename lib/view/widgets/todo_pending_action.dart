@@ -38,47 +38,19 @@ class _TodoPendingState extends State<TodoPending> {
                                 color: scheme.onInverseSurface),
                             child: CheckboxListTile(
                                 title: Text(prendingActions[i].title!),
-                                secondary: PopupMenuButton(
-                                    child: const Icon(Icons.more_vert),
-                                    itemBuilder: (context) => [
-                                          PopupMenuItem(
-                                              child: const Row(children: [
-                                                Icon(Icons.edit),
-                                                SizedBox(width: 16),
-                                                Text('Edit')
-                                              ]),
-                                              onTap: () {
-                                                Get.to(() => AddTodo(
-                                                      data: prendingActions[i],
-                                                    ));
-                                              }),
-                                          PopupMenuItem(
-                                              child: Row(children: [
-                                                Icon(
-                                                  Icons.delete,
-                                                  color: scheme.error,
-                                                ),
-                                                const SizedBox(width: 16),
-                                                const Text('Delete')
-                                              ]),
-                                              onTap: () => mydialog(
-                                                  context: context,
-                                                  title: 'Delete Todo',
-                                                  content:
-                                                      'Delete this todo and its contents',
-                                                  ontap: () async {
-                                                    await ApiDeleteServices()
-                                                        .deleteTodos(
-                                                            id: prendingActions[
-                                                                    i]
-                                                                .id);
-                                                    setState(() {
-                                                      prendingActions
-                                                          .removeAt(i);
-                                                    });
-                                                    Get.close(1);
-                                                  }))
-                                        ]),
+                                secondary: moreButton(
+                                    scheme: scheme,
+                                    editTap: () => Get.to(
+                                        AddTodo(data: prendingActions[i])),
+                                    deleteTap: () async {
+                                      ApiDeleteServices().deleteTodos(
+                                          id: prendingActions[i].id);
+                                      Get.back();
+                                      setState(() {
+                                        prendingActions.removeAt(i);
+                                      });
+                                    },
+                                    content: 'Todo'),
                                 controlAffinity:
                                     ListTileControlAffinity.leading,
                                 activeColor: Colors.blue,
@@ -87,8 +59,8 @@ class _TodoPendingState extends State<TodoPending> {
                                   mydialog(
                                       context: context,
                                       title: 'Mark Completed',
-                                      content:
-                                          'Will be moved to Completed Actions',
+                                      content: const Text(
+                                          'Will be moved to Completed Actions'),
                                       ontap: () => setState(() {
                                             prendingActions[i].completed =
                                                 value;
