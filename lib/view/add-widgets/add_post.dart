@@ -63,12 +63,12 @@ class _AddPostState extends State<AddPost> {
                 const SizedBox(height: 16),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.3,
-                  child: TextFormField(
+                  child: TextFormField(textAlignVertical: TextAlignVertical.top,
                     controller: contentController,
                     expands: true,
-                    maxLines: null,
+                    maxLines: null,textAlign: TextAlign.start,
                     decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('Content')),
+                        border: OutlineInputBorder(), labelText: 'Content'),
                   ),
                 ),
                 Padding(
