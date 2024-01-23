@@ -21,6 +21,8 @@ An application based in JSON Rest API, included crud operations, beautiful UI an
 ## Features
 
 - Automatic Light/dark mode
+- Remembers the user, if changes
+- Show data according to user, all data changes if user changes.
 - CRUD operations
 - Cross platform
 
@@ -29,7 +31,7 @@ An application based in JSON Rest API, included crud operations, beautiful UI an
 
 **Client:** Flutter, Dart
 
-**Server:** http
+**Server:** http, Hive
 
 
 ## Support
