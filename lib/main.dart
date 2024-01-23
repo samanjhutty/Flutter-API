@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         '/': (p0) => const HomePage(),
         '/add-user': (p0) => const AddUser(),
