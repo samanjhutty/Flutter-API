@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  final String title = 'Flutter API';
+  final String title = 'Json Rest API';
   @override
   State<HomePage> createState() => _HomePageState();
 }

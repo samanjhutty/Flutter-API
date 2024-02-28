@@ -15,7 +15,7 @@ An application based in JSON Rest API, included crud operations, beautiful UI an
 
 &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/posts.png" width="200"> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/show-photos.png" width="200"> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/todos.png" width="200"> 
 
-<br/> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/user-details.png" width="200"> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/new-post.png" width="200"> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/users.png" width="200"> 
+<br/> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/user-details.png" width="200"> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/new-album.png" width="200"> &emsp;&emsp; <img src="https://github.com/samanjhutty/Flutter-API/blob/main/screenshots/users.png" width="200"> 
 
 
 ## Features
