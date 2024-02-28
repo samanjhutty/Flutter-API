@@ -10,15 +10,15 @@ import 'package:get/get.dart';
 import '../../controller/api-services/api_get.dart';
 
 class UserDetails extends StatefulWidget {
-  const UserDetails({super.key, required this.userId});
+  const UserDetails({super.key});
 
-  final int userId;
   @override
   State<StatefulWidget> createState() => _UserDetailsState();
 }
 
 class _UserDetailsState extends State<UserDetails> {
   UsersModel? _userData;
+  int userId = box.get('id');
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _UserDetailsState extends State<UserDetails> {
     Future.delayed(const Duration(milliseconds: 1))
         .then((value) => setState(() {
               for (int i = 0; i < data!.length; i++) {
-                if (data[i].id == widget.userId) {
+                if (data[i].id == userId) {
                   _userData = data[i];
                   break;
                 }
@@ -42,6 +42,7 @@ class _UserDetailsState extends State<UserDetails> {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     double tablerowspacing = MediaQuery.of(context).size.height * 0.007;
+    userId = box.get('id');
 
     return _userData == null
         ? Center(child: noData(data: _getUserData))
@@ -237,8 +238,7 @@ class _UserDetailsState extends State<UserDetails> {
                         scheme: scheme,
                         editTap: () => Get.to(() => AddUser(data: _userData)),
                         deleteTap: () async {
-                          await ApiDeleteServices()
-                              .deleteUser(id: widget.userId);
+                          await ApiDeleteServices().deleteUser(id: userId);
                           Get.close(1);
                         },
                         content: 'User')

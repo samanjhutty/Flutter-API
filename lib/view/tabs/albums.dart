@@ -10,15 +10,15 @@ import 'package:get/get.dart';
 import '../../main.dart';
 
 class Albums extends StatefulWidget {
-  const Albums({super.key, required this.userId});
+  const Albums({super.key});
 
-  final int userId;
   @override
   State<Albums> createState() => _AlbumsState();
 }
 
 class _AlbumsState extends State<Albums> {
   List<AlbumsModel>? list = [];
+  int userId = box.get('id');
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _AlbumsState extends State<Albums> {
     Future.delayed(const Duration(milliseconds: 1))
         .then((value) => setState(() {
               for (int i = 0; i < data!.length; i++) {
-                if (data[i].userId == widget.userId) {
+                if (data[i].userId == userId) {
                   list!.add(data[i]);
                 }
               }

@@ -71,7 +71,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final int id = Hive.box('APIbox').get('id', defaultValue: 1);
 
     return Scaffold(
         appBar: AppBar(
@@ -83,12 +82,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               labelColor: Colors.blue[800],
               unselectedLabelColor: scheme.outlineVariant,
             )),
-        body: TabBarView(controller: _tabController, children: [
-          const Posts(),
-          Albums(userId: id),
-          Todos(userId: id),
-          UserDetails(userId: id)
-        ]));
+        body: TabBarView(
+            controller: _tabController,
+            children: const [Posts(), Albums(), Todos(), UserDetails()]));
   }
 }
 

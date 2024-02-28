@@ -4,6 +4,7 @@ import 'package:api/models/users_models.dart';
 import 'package:api/controller/api-services/api_get.dart';
 import 'package:api/view/widgets/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Users extends StatefulWidget {
   const Users({super.key});
@@ -49,7 +50,7 @@ class _UsersState extends State<Users> {
                   itemCount: _userData!.length,
                   itemBuilder: (context, i) => Card(
                         child: InkWell(
-                            onTap: () {
+                            onTap: () async {
                               setState(() {
                                 if (box.get('id') == _userData![i].id) {
                                   Navigator.pop(context);
@@ -58,10 +59,7 @@ class _UsersState extends State<Users> {
                                 }
                               });
                               Navigator.pop(context);
-                              Navigator.pushAndRemoveUntil(context,
-                                  MaterialPageRoute(builder: (_) {
-                                return const Material(child: HomePage());
-                              }), (route) => route.isCurrent);
+                              Get.offAllNamed('/');
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8),

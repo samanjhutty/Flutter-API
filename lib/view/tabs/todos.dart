@@ -1,4 +1,5 @@
 import 'package:api/models/todos_model.dart';
+import 'package:api/view/widgets/assets.dart';
 import 'package:api/view/widgets/todo_completed_actions.dart';
 import 'package:api/controller/api-services/api_get.dart';
 import 'package:api/view/widgets/todo_pending_action.dart';
@@ -7,15 +8,15 @@ import 'package:api/main.dart';
 import 'package:get/get.dart';
 
 class Todos extends StatefulWidget {
-  const Todos({super.key, required this.userId});
+  const Todos({super.key});
 
-  final int userId;
   @override
   State<Todos> createState() => _TodosState();
 }
 
 class _TodosState extends State<Todos> with TickerProviderStateMixin {
   List<TodosModel>? todoData = [];
+  int userId = box.get('id');
 
   final List<Tab> _tabs = const [
     Tab(text: 'Pending Actions'),
@@ -47,7 +48,7 @@ class _TodosState extends State<Todos> with TickerProviderStateMixin {
     Future.delayed(const Duration(milliseconds: 1))
         .then((value) => setState(() {
               for (int i = 0; i < data!.length; i++) {
-                if (data[i].userId == widget.userId) {
+                if (data[i].userId == userId) {
                   todoData!.add(data[i]);
                 }
               }
