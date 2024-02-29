@@ -55,6 +55,13 @@ class _AddPostState extends State<AddPost> {
                 Padding(
                   padding: const EdgeInsets.only(top: 24),
                   child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Title cannot be empty';
+                      } else {
+                        return null;
+                      }
+                    },
                     controller: titleController,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), label: Text('Title')),
@@ -63,10 +70,19 @@ class _AddPostState extends State<AddPost> {
                 const SizedBox(height: 16),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.3,
-                  child: TextFormField(textAlignVertical: TextAlignVertical.top,
+                  child: TextFormField(
+                    textAlignVertical: TextAlignVertical.top,
                     controller: contentController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'content is required';
+                      } else {
+                        return null;
+                      }
+                    },
                     expands: true,
-                    maxLines: null,textAlign: TextAlign.start,
+                    maxLines: null,
+                    textAlign: TextAlign.start,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), labelText: 'Content'),
                   ),

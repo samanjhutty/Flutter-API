@@ -18,7 +18,7 @@ class Albums extends StatefulWidget {
 
 class _AlbumsState extends State<Albums> {
   List<AlbumsModel>? list = [];
-  int userId = box.get('id');
+  int userId = box.get('id', defaultValue: 1);
 
   @override
   void initState() {
@@ -126,12 +126,17 @@ class _AlbumsState extends State<Albums> {
                       yesText: 'Create',
                       title: 'Create Album',
                       ontap: () async {
-                        await ApiPostServices().postAlbum(
-                            data: AlbumsModel(
-                                    userId: box.get('id'),
-                                    title: albumController.text)
-                                .toJson());
-                        Get.close(1);
+                        if (albumController.text.isNotEmpty) {
+                          await ApiPostServices().postAlbum(
+                              data: AlbumsModel(
+                                      userId: box.get('id'),
+                                      title: albumController.text)
+                                  .toJson());
+                          Get.close(1);
+                        } else {
+                          Get.rawSnackbar(
+                              message: 'Album name cannot be empty');
+                        }
                       });
                 }),
           );

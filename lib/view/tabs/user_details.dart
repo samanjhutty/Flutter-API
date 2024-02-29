@@ -18,7 +18,7 @@ class UserDetails extends StatefulWidget {
 
 class _UserDetailsState extends State<UserDetails> {
   UsersModel? _userData;
-  int userId = box.get('id');
+  int userId = box.get('id', defaultValue: 1);
   @override
   void initState() {
     super.initState();
@@ -42,7 +42,7 @@ class _UserDetailsState extends State<UserDetails> {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     double tablerowspacing = MediaQuery.of(context).size.height * 0.007;
-    userId = box.get('id');
+    userId = box.get('id', defaultValue: 1);
 
     return _userData == null
         ? Center(child: noData(data: _getUserData))

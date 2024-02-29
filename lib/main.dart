@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'view/add-widgets/add_comment.dart';
-import 'view/add-widgets/add_photo.dart';
 import 'view/add-widgets/add_post.dart';
 import 'view/add-widgets/add_todo.dart';
 import 'view/add-widgets/add_user.dart';
@@ -33,8 +31,6 @@ class MyApp extends StatelessWidget {
         '/': (p0) => const HomePage(),
         '/add-user': (p0) => const AddUser(),
         '/add-todo': (p0) => const AddTodo(),
-        '/add-photo': (p0) => const AddPhoto(),
-        '/add-comment': (p0) => const AddComment(),
         '/add-post': (p0) => const AddPost(),
       },
       theme: myTheme(Brightness.light),

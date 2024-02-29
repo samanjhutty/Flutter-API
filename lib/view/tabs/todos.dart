@@ -16,7 +16,7 @@ class Todos extends StatefulWidget {
 
 class _TodosState extends State<Todos> with TickerProviderStateMixin {
   List<TodosModel>? todoData = [];
-  int userId = box.get('id');
+  int userId = box.get('id', defaultValue: 1);
 
   final List<Tab> _tabs = const [
     Tab(text: 'Pending Actions'),
