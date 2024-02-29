@@ -66,8 +66,8 @@ class _PostState extends State<Posts> {
                                       title: Text(list![i].title!),
                                       trailing: moreButton(
                                           scheme: scheme,
-                                          editTap: () =>
-                                              Get.to(AddPost(data: list![i])),
+                                          editTap: () => Get.to(
+                                              () => AddPost(data: list![i])),
                                           deleteTap: () async {
                                             await ApiDeleteServices()
                                                 .deletePosts(id: list![i].id);
@@ -82,9 +82,10 @@ class _PostState extends State<Posts> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         TextButton(
-                                            onPressed: () => Get.to(Comments(
-                                                  postId: list![i].id,
-                                                )),
+                                            onPressed: () =>
+                                                Get.to(() => Comments(
+                                                      postId: list![i].id,
+                                                    )),
                                             child: const Text('Show Commets')),
                                       ]),
                                   const Divider(thickness: 0.3)

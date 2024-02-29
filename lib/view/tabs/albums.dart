@@ -64,8 +64,8 @@ class _AlbumsState extends State<Albums> {
                     child: ListView.builder(
                         itemCount: list?.length,
                         itemBuilder: (context, i) => ListTile(
-                            onTap: () =>
-                                Get.to(AlbumPhotos(albumId: list![i].id!)),
+                            onTap: () => Get.to(
+                                () => AlbumPhotos(albumId: list![i].id!)),
                             contentPadding: const EdgeInsets.all(8),
                             title: Text(list![i].title!),
                             titleTextStyle: TextStyle(
