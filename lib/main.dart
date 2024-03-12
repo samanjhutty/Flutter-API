@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'view/add-widgets/add_post.dart';
 import 'view/add-widgets/add_todo.dart';
 import 'view/add-widgets/add_user.dart';
@@ -61,7 +62,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     _tabController = TabController(length: _topTabs.length, vsync: this);
+    _checkForUpdate();
     super.initState();
+  }
+
+  /// Checks for app store updates.
+  Future<void> _checkForUpdate() async {
+    InAppUpdate.checkForUpdate().then((info) {
+      info.updateAvailability == UpdateAvailability.updateAvailable
+          ? InAppUpdate.startFlexibleUpdate()
+          : null;
+    }).catchError((e) {
+      Get.log(e.toString());
+    });
   }
 
   @override
@@ -69,18 +82,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-        appBar: AppBar(
-            title: Text(widget.title),
-            bottom: TabBar(
-              dividerColor: Colors.transparent,
-              tabs: _topTabs,
-              controller: _tabController,
-              labelColor: Colors.blue[800],
-              unselectedLabelColor: scheme.outlineVariant,
-            )),
-        body: TabBarView(
+      appBar: AppBar(
+          title: Text(widget.title),
+          bottom: TabBar(
+            dividerColor: Colors.transparent,
+            tabs: _topTabs,
             controller: _tabController,
-            children: const [Posts(), Albums(), Todos(), UserDetails()]));
+            labelColor: Colors.blue[800],
+            unselectedLabelColor: scheme.outlineVariant,
+          )),
+      body: TabBarView(
+          controller: _tabController,
+          children: const [Posts(), Albums(), Todos(), UserDetails()]),
+    );
   }
 }
 
