@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-Box box = Hive.box('APIbox');
 
 mydialog(
         {required BuildContext context,

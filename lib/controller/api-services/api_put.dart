@@ -8,8 +8,7 @@ class ApiPutServices {
   Future<void> updateUserDetails(
       {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url =
-          Uri.parse('${ApiConstants.baseURL + ApiConstants.userEndpoint}/$id');
+      var url = Uri.parse('${Constants.baseURL + Constants.userEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -29,8 +28,7 @@ class ApiPutServices {
   Future<void> updateTodo(
       {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url =
-          Uri.parse('${ApiConstants.baseURL + ApiConstants.todoEndpoint}/$id');
+      var url = Uri.parse('${Constants.baseURL + Constants.todoEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -50,8 +48,7 @@ class ApiPutServices {
   Future<void> updatePost(
       {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url =
-          Uri.parse('${ApiConstants.baseURL + ApiConstants.postEndpoint}/$id');
+      var url = Uri.parse('${Constants.baseURL + Constants.postEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -71,8 +68,7 @@ class ApiPutServices {
   Future<void> updatePhoto(
       {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url =
-          Uri.parse('${ApiConstants.baseURL + ApiConstants.photoEndpoint}/$id');
+      var url = Uri.parse('${Constants.baseURL + Constants.photoEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -92,8 +88,8 @@ class ApiPutServices {
   Future<void> updateComment(
       {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url = Uri.parse(
-          '${ApiConstants.baseURL + ApiConstants.commentEndpoint}/$id');
+      var url =
+          Uri.parse('${Constants.baseURL + Constants.commentEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -113,8 +109,7 @@ class ApiPutServices {
   Future<void> updateAlbum(
       {required Map<String, dynamic> data, required int id}) async {
     try {
-      var url =
-          Uri.parse('${ApiConstants.baseURL + ApiConstants.albumEndpoint}/$id');
+      var url = Uri.parse('${Constants.baseURL + Constants.albumEndpoint}/$id');
       var response = await http.put(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',

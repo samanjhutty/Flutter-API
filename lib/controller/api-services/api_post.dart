@@ -6,7 +6,7 @@ import '../constants.dart';
 class ApiPostServices {
   Future<void> postTodo({required Map<String, dynamic> data}) async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.todoEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.todoEndpoint);
       var response = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -25,7 +25,7 @@ class ApiPostServices {
 
   Future<void> createUser({required Map<String, dynamic> data}) async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.userEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.userEndpoint);
       var response = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -44,7 +44,7 @@ class ApiPostServices {
 
   Future<void> postUserPost({required Map<String, dynamic> data}) async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.postEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.postEndpoint);
       var response = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -63,7 +63,7 @@ class ApiPostServices {
 
   Future<void> postPhoto({required Map<String, dynamic> data}) async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.photoEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.photoEndpoint);
       var response = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -82,7 +82,7 @@ class ApiPostServices {
 
   Future<void> postComments({required Map<String, dynamic> data}) async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.commentEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.commentEndpoint);
       var response = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -101,7 +101,7 @@ class ApiPostServices {
 
   Future<void> postAlbum({required Map<String, dynamic> data}) async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.albumEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.albumEndpoint);
       var response = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',

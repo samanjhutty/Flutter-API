@@ -1,6 +1,8 @@
+import 'package:api/controller/dbcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'controller/constants.dart';
 import 'view/add-widgets/add_comment.dart';
 import 'view/add-widgets/add_photo.dart';
 import 'view/add-widgets/add_post.dart';
@@ -13,7 +15,7 @@ import 'view/tabs/user_details.dart';
 
 void main(List<String> args) async {
   await Hive.initFlutter();
-  await Hive.openBox('APIbox');
+  await Hive.openBox(Constants.boxName);
   runApp(const MyApp());
 }
 
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: BindingsBuilder(() => Get.lazyPut(() => DbController())),
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (p0) => const HomePage(),
@@ -54,6 +57,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController? _tabController;
+  DbController controller = Get.find();
 
   final List<Tab> _topTabs = const [
     Tab(icon: Icon(Icons.feed)),
@@ -71,24 +75,38 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final int id = Hive.box('APIbox').get('id', defaultValue: 1);
 
-    return Scaffold(
-        appBar: AppBar(
-            title: Text(widget.title),
-            bottom: TabBar(
-              dividerColor: Colors.transparent,
-              tabs: _topTabs,
-              controller: _tabController,
-              labelColor: Colors.blue[800],
-              unselectedLabelColor: scheme.outlineVariant,
-            )),
-        body: TabBarView(controller: _tabController, children: [
-          const Posts(),
-          Albums(userId: id),
-          Todos(userId: id),
-          UserDetails(userId: id)
-        ]));
+    return Obx(() {
+      return Scaffold(
+          appBar: controller.isHomeLoading.value
+              ? null
+              : AppBar(
+                  title: Text(widget.title),
+                  bottom: TabBar(
+                    dividerColor: Colors.transparent,
+                    tabs: _topTabs,
+                    controller: _tabController,
+                    labelColor: Colors.blue[800],
+                    unselectedLabelColor: scheme.outlineVariant,
+                  )),
+          body: controller.isHomeLoading.value
+              ? Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      const Text('Please wait while we load your content...'),
+                      const SizedBox(height: 24),
+                      LinearProgressIndicator(
+                        borderRadius: BorderRadius.circular(24),
+                        value: controller.homeLoadPerc.value,
+                      )
+                    ]),
+                  ),
+                )
+              : TabBarView(
+                  controller: _tabController,
+                  children: const [Posts(), Albums(), Todos(), UserDetails()]));
+    });
   }
 }
 

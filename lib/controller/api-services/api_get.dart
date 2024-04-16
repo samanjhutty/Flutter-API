@@ -11,7 +11,7 @@ import 'package:api/models/users_models.dart';
 class ApiGetServices {
   Future<List<UsersModel>?> getUsers() async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.userEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.userEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -27,7 +27,7 @@ class ApiGetServices {
 
   Future<List<TodosModel>?> getTodos() async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.todoEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.todoEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -43,7 +43,7 @@ class ApiGetServices {
 
   Future<List<PostsModel>?> getPosts() async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.postEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.postEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -59,7 +59,7 @@ class ApiGetServices {
 
   Future<List<PhotosModel>?> getPhotos() async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.photoEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.photoEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -75,7 +75,7 @@ class ApiGetServices {
 
   Future<List<CommentsModel>?> getComments() async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.commentEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.commentEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -91,7 +91,7 @@ class ApiGetServices {
 
   Future<List<AlbumsModel>?> getAlbums() async {
     try {
-      var url = Uri.parse(ApiConstants.baseURL + ApiConstants.albumEndpoint);
+      var url = Uri.parse(Constants.baseURL + Constants.albumEndpoint);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
