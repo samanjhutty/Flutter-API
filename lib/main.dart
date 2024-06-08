@@ -66,19 +66,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     _tabController = TabController(length: _topTabs.length, vsync: this);
-    _checkForUpdate();
     super.initState();
-  }
-
-  /// Checks for app store updates.
-  Future<void> _checkForUpdate() async {
-    InAppUpdate.checkForUpdate().then((info) {
-      info.updateAvailability == UpdateAvailability.updateAvailable
-          ? InAppUpdate.startFlexibleUpdate()
-          : null;
-    }).catchError((e) {
-      Get.log(e.toString());
-    });
   }
 
   @override

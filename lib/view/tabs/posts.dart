@@ -6,9 +6,46 @@ import 'package:api/view/widgets/assets.dart';
 import 'package:api/view/widgets/comments.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:in_app_update/in_app_update.dart';
 
 class Posts extends GetView<DbController> {
   const Posts({super.key});
+
+  @override
+  State<Posts> createState() => _PostState();
+}
+
+class _PostState extends State<Posts> {
+  List<PostsModel>? list = [];
+
+  @override
+  void initState() {
+    _getPostsData();
+    super.initState();
+  }
+
+  void _getPostsData() async {
+    list = await ApiGetServices().getPosts();
+    Future.delayed(const Duration(milliseconds: 1)).then((value) {
+      setState(() {});
+      _checkForUpdate();
+    });
+  }
+
+  Future<void> _checkForUpdate() async {
+    InAppUpdate.checkForUpdate().then((info) {
+      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+        _update();
+      }
+    }).catchError((e) {
+      Get.log(e.toString());
+    });
+  }
+
+  void _update() async {
+    await InAppUpdate.startFlexibleUpdate();
+    InAppUpdate.completeFlexibleUpdate();
+  }
 
   @override
   Widget build(BuildContext context) {
