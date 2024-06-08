@@ -6,9 +6,6 @@ List<TodosModel> todoModelFromJson(String str) =>
 String todoModelToJson(List<TodosModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-List<TodosModel> completedActions = [];
-List<TodosModel> prendingActions = [];
-
 class TodosModel {
   int? userId;
   int? id;

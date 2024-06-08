@@ -3,6 +3,8 @@ import 'package:api/controller/api-services/api_put.dart';
 import 'package:api/models/posts_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/constants.dart';
+import '../../controller/dbcontroller.dart';
 import '../widgets/assets.dart';
 
 class AddPost extends StatefulWidget {
@@ -100,7 +102,7 @@ class _AddPostState extends State<AddPost> {
                                   if (widget.data != null) {
                                     await ApiPutServices().updatePost(
                                       data: PostsModel(
-                                              userId: box.get('id'),
+                                              userId: box.get(Constants.userId),
                                               title: titleController.text,
                                               body: contentController.text)
                                           .toJson(),
@@ -110,7 +112,8 @@ class _AddPostState extends State<AddPost> {
                                   } else {
                                     ApiPostServices().postUserPost(
                                         data: PostsModel(
-                                                userId: box.get('id'),
+                                                userId:
+                                                    box.get(Constants.userId),
                                                 title: titleController.text,
                                                 body: contentController.text)
                                             .toJson());

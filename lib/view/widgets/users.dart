@@ -1,31 +1,12 @@
 import 'dart:ui';
+import 'package:api/controller/constants.dart';
 import 'package:api/main.dart';
-import 'package:api/models/users_models.dart';
-import 'package:api/controller/api-services/api_get.dart';
-import 'package:api/view/widgets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/dbcontroller.dart';
 
-class Users extends StatefulWidget {
+class Users extends GetView<DbController> {
   const Users({super.key});
-
-  @override
-  State<Users> createState() => _UsersState();
-}
-
-class _UsersState extends State<Users> {
-  List<UsersModel>? _userData = [];
-  @override
-  void initState() {
-    super.initState();
-    _getUserData();
-  }
-
-  void _getUserData() async {
-    _userData = await ApiGetServices().getUsers();
-    Future.delayed(const Duration(milliseconds: 1))
-        .then((value) => setState(() {}));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,23 +24,25 @@ class _UsersState extends State<Users> {
         title: const Text('Switch User'),
         content: SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: _userData!.isEmpty
-              ? Center(child: noData(data: () => _getUserData()))
+          child: controller.userList.isEmpty
+              ? Center(child: noData(data: () => controller.getUserData()))
               : ListView.builder(
                   shrinkWrap: true,
-                  itemCount: _userData!.length,
+                  itemCount: controller.userList.length,
                   itemBuilder: (context, i) => Card(
                         child: InkWell(
-                            onTap: () async {
-                              setState(() {
-                                if (box.get('id') == _userData![i].id) {
-                                  Navigator.pop(context);
-                                } else {
-                                  box.put('id', _userData![i].id);
-                                }
-                              });
+                            onTap: () {
+                              if (box.get(Constants.userId) ==
+                                  controller.userList[i].id) {
+                                Navigator.pop(context);
+                              } else {
+                                box.put(Constants.userId,
+                                    controller.userList[i].id);
+                                controller.userId =
+                                    controller.userList[i].id ?? 1;
+                              }
                               Navigator.pop(context);
-                              Get.offAllNamed('/');
+                              controller.getAllData(home: false);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8),
@@ -71,15 +54,16 @@ class _UsersState extends State<Users> {
                                       padding: const EdgeInsets.only(right: 16),
                                       child: CircleAvatar(
                                           radius: 16,
-                                          child: Text(
-                                              _userData![i].id.toString())),
+                                          child: Text(controller.userList[i].id
+                                              .toString())),
                                     ),
                                     Expanded(
                                         child: Padding(
                                             padding:
                                                 const EdgeInsets.only(right: 8),
                                             child: Text(
-                                              _userData![i].name.toString(),
+                                              controller.userList[i].name
+                                                  .toString(),
                                               style: const TextStyle(
                                                   fontFeatures: [
                                                     FontFeature.swash()
@@ -89,7 +73,7 @@ class _UsersState extends State<Users> {
                                             ))),
                                     Expanded(
                                         child: Text(
-                                      _userData![i].email.toString(),
+                                      controller.userList[i].email.toString(),
                                       textAlign: TextAlign.left,
                                     )),
                                   ]),
